@@ -8,7 +8,6 @@ import {
   CssBaseline,
   TextField,
   Paper,
-  Box,
   Grid,
   Typography,
 } from '@material-ui/core';
