@@ -1,8 +1,12 @@
 import React from 'react';
+import Nav from './Nav';
 
 function Pantry() {
   return (
-    <h1>Pantry Page</h1>
+    <>
+      <Nav />
+      <h1>Pantry Page</h1>
+    </>
   );
 }
 

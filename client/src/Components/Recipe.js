@@ -1,8 +1,12 @@
 import React from 'react';
+import Nav from './Nav';
 
 function Recipe() {
   return (
-    <h1>Recipe Page</h1>
+    <>
+      <Nav />
+      <h1>Recipe Page</h1>
+    </>
   );
 }
 
