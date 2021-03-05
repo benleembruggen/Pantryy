@@ -4,13 +4,12 @@ import Home from './Components/Home';
 import Pantry from './Components/Pantry';
 import Recipe from './Components/Recipe';
 import Nav from './Components/Nav';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <h1>Hello</h1>
         <Nav />
         <Switch>
           <Route path="/" exact component={Home} />
