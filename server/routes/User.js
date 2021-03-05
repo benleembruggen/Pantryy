@@ -4,7 +4,7 @@ const passport = require('passport');
 const passportConfig = require('../middleware/passport');
 const JWT = require('jsonwebtoken');
 const User = require('../models/User');
-// const Tasks = require('../models/Tasks');
+const Item = require('../models/Item');
 
 const signToken = (userId) => {
   return JWT.sign(
@@ -75,6 +75,54 @@ userRouter.get(
   (req, res) => {
     const { username, role } = req.user;
     res.status(200).json({ isAuthenticated: true, user: { username, role } });
+  }
+);
+
+userRouter.get(
+  '/pantry',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    User.findById({ _id: req.user._id })
+      .populate('pantry')
+      .exec((err, document) => {
+        if (err)
+          res.status(500).json({
+            message: { msgBody: 'Error has occurred 1', msgError: true },
+          });
+        else {
+          res.status(200).json({ pantry: document.pantry, authenticate: true });
+        }
+      });
+  }
+);
+
+userRouter.post(
+  '/item',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const item = new Item(req.body);
+    item.save((err) => {
+      if (err)
+        res.status(500).json({
+          message: { msgBody: 'Error has occurred', msgError: true },
+        });
+      else {
+        req.user.pantry.push(item);
+        req.user.save((err) => {
+          if (err)
+            res.status(500).json({
+              message: { msgBody: 'Error has occurred', msgError: true },
+            });
+          else
+            res.status(200).json({
+              message: {
+                msgBody: 'Successfully added item',
+                msgError: false,
+              },
+            });
+        });
+      }
+    });
   }
 );
 
