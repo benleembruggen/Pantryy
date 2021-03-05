@@ -3,6 +3,7 @@ import React from 'react';
 import Home from './Components/Home';
 import Pantry from './Components/Pantry';
 import Recipe from './Components/Recipe';
+import Nav from './Components/Nav';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
