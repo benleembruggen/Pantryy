@@ -10,7 +10,6 @@ itemRouter.get(
   '/search',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
-    console.log(req.user);
     const data = await callFoodApi('food', { ingr: 'TODO: REPLACE' });
     res.json(data);
   }
