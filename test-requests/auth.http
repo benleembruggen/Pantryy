@@ -1,0 +1,10 @@
+POST /user/login HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MWU5ZDUyYmE3Y2RmYTAwN2IxZmUxIiwiaWF0IjoxNjE0OTM2NzU3LCJleHAiOjE2MTQ5NDAzNTd9.5PkljLJmfst_rv-fZ69CVT3c3TCFiekgwbMNAW4s_fg
+Content-Length: 55
+
+{
+    "username": "admin",
+    "password": "admin"
+}
