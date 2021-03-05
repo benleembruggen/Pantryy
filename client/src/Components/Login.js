@@ -18,8 +18,6 @@ import food from '../images/food.svg';
 const Login = (props) => {
   const [user, setUser] = useState({ username: '', password: '' });
   const authContext = useContext(AuthContext);
-  console.log(authContext);
-  console.log('peepee');
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -30,9 +28,7 @@ const Login = (props) => {
     AuthService.login(user).then((data) => {
       const { isAuthenticated, user } = data;
       if (isAuthenticated) {
-        console.log(authContext);
         authContext.setUser(user);
-        console.log('sdfsd');
         authContext.setIsAuthenticated(isAuthenticated);
         props.history.push('/pantry');
       }
@@ -119,7 +115,6 @@ const Login = (props) => {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}></Box>
           </form>
         </div>
       </Grid>
