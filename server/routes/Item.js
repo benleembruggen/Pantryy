@@ -7,7 +7,7 @@ const passport = require('passport');
 const itemRouter = express.Router();
 
 itemRouter.get(
-  '/hi',
+  '/search',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     console.log(req.user);
