@@ -16,7 +16,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: cookieExtractor,
-      secretOrKey: 'MonDashDashboard',
+      secretOrKey: 'unihack',
     },
     (payload, done) => {
       User.findById({ _id: payload.sub }, (err, user) => {

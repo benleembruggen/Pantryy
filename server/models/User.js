@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     required: true,
   },
-  // tasks: [{ type: mongoose.Schema.Types.ObjectID, ref: 'Tasks' }],
+  pantry: [{ type: mongoose.Schema.Types.ObjectID, ref: 'Item' }],
 });
 
 UserSchema.pre('save', function (next) {
