@@ -28,7 +28,7 @@ pantryRouter.post(
   '/item',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
-    const { name, quantity, unit: measure } = req.body;
+    const { name, quantity, measure } = req.body;
     const { pantry } = await User.findById({ _id: req.user._id }).populate('pantry');
 
     const { hints } = await callFoodApi('food', { ingr: name });

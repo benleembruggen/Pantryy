@@ -7,19 +7,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import FoodIcon from '@material-ui/icons/Fastfood';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import AuthService from '../Services/AuthService';
 import Paper from '@material-ui/core/Paper';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+import PantryItem from './PantryItem';
 
 function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
@@ -66,13 +58,7 @@ const Pantry = (props) => {
         style={{ overflow: 'scroll', height: `80vh` }}
       >
         <Divider />
-        {props.pantry.map((item) => (
-          <>
-            <ListItem button>
-              <ListItemText primary={`· ${item.name}`} />
-            </ListItem>
-          </>
-        ))}
+        {props.pantry.map((item) => <PantryItem item={item} />)}
       </List>
       <div style={{ height: `10vh` }}>
         <Button aria-label='delete' onClick={onClickLogoutHandler}>
