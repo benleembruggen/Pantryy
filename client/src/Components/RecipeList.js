@@ -87,7 +87,7 @@ export default function RecipeList(props) {
                       : (<></>)
                   }
                   {
-                    tile.recipe.healthLabels.includes("Vegetarian") ?
+                    tile.recipe.healthLabels.includes("Vegetarian") && ! tile.recipe.healthLabels.includes("Vegan")?
                       (
                         <IconButton className={classes.strongIcon}>
                           V
