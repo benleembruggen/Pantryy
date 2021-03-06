@@ -14,7 +14,9 @@ function Home() {
       <Grid container spacing={3}>
         <Grid item xs>
           <div style={{ height: `10vh` }}>
-            <h2>Pantryy</h2>
+            <div style={{ fontFamily: 'Lobster', color: '#f59b90' }}>
+              <h2>Pantryy</h2>
+            </div>
             <Button onClick={() => setOpen(true)} variant='contained' color='primary'>
               Add item to pantry
             </Button>

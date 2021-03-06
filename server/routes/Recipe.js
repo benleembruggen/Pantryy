@@ -11,7 +11,7 @@ recipeRouter.get(
   '/search',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
-    const { name, requireAllIngredientsAvailable } = req.body;
+    const { name, requireAllIngredientsAvailable } = req.query;
     const { hits } = await callFoodApi('recipeSearch', { q: name });
     console.log(hits);
 
