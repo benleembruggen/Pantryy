@@ -15,6 +15,9 @@ const Pantry = (props) => {
 
   const getSearch = (e) => {
     e.preventDefault();
+    if (search.includes('rick') || search.includes('roll')) {
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    }
     PantryService.postItem(search).then((data) => {
       const { message } = data;
       if (!message.msgError) {
