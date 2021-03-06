@@ -28,9 +28,10 @@ pantryRouter.post(
   '/item',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
-    const { name, quantity, unit } = req.body;
+    const { name, quantity, unit: measure } = req.body;
+    const { pantry } = await User.findById({ _id: req.user._id }).populate('pantry');
+
     const { hints } = await callFoodApi('food', { ingr: name });
-    console.log(hints);
     if (hints.length === 0) {
       res.status(500).json({
         message: { msgBody: "Can't find item", msgError: true },
@@ -41,18 +42,31 @@ pantryRouter.post(
       console.warn('More than one food returned, just using the first one');
     }
 
-    const { foodId, label, image } = hints[0].food;
+    const { foodId, label } = hints[0].food;
     const { measures } = hints[0];
 
-    const measureInfo = measures.find(({ label }) => label === unit);
+    const duplicateItem = pantry.find(({ name: existingItemName }) => label === existingItemName);
 
-    if (!measureInfo) throw new Error('Invalid unit provided')
+    if (duplicateItem && duplicateItem.preferredMeasure === measure) {
+      await Item.findByIdAndUpdate(duplicateItem._id, { quantity: duplicateItem.quantity + quantity });
+      res.status(200).json({
+        message: {
+          msgBody: 'Successfully updated item',
+          msgError: false,
+        },
+      });
+      return;
+    }
+
+    const measureInfo = measures.find(({ label }) => label === measure);
+
+    if (!measureInfo) throw new Error('Invalid measure provided')
 
     const itemData = {
       name: label,
       foodId,
       quantity,
-      preferredMeasure: unit,
+      preferredMeasure: measure,
       weightPerMeasure: measureInfo.weight,
       img: `https://spoonacular.com/cdn/ingredients_100x100/${label.toLowerCase()}.jpg`,
     };
