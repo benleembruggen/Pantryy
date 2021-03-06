@@ -11,6 +11,7 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AuthService from '../Services/AuthService';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { AuthContext } from '../Context/AuthContext';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   root: {
