@@ -7,12 +7,15 @@ const passport = require('passport');
 const itemRouter = express.Router();
 
 itemRouter.get(
-  '/search',
+  '/suggest',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
-    const data = await callFoodApi('food', { ingr: 'TODO: REPLACE' });
+    const { name } = req.query;
+    console.log(name);
+    const { hints } = await callFoodApi('food', { ingr: name });
+    console.log(name, hints);
     // We need return the preferred measures here too.
-    res.json(data);
+    res.json(hints);
   }
 );
 
