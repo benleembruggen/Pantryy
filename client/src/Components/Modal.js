@@ -29,11 +29,19 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
   const [item, setItem] = useState(null);
 
   const updateSearch = (e) => {
-    if (e.target.value && (e.target.value.includes('rick') || e.target.value.includes('roll'))) {
+    if (
+      e.target.value &&
+      (e.target.value.includes('rick') || e.target.value.includes('roll'))
+    ) {
       window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     }
     clearTimeout(timerReference);
-    setTimerReference(setTimeout(() => ItemService.suggestItems(e.target.value).then(setSearchOptions), 700)); //TODO: change to 100
+    setTimerReference(
+      setTimeout(
+        () => ItemService.suggestItems(e.target.value).then(setSearchOptions),
+        700
+      )
+    ); //TODO: change to 100
   };
 
   const getSearch = (e) => {
@@ -42,7 +50,7 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
       const { message } = data;
       if (!message.msgError) {
         PantryService.getPantry().then((getData) => {
-          setPantry(getData.pantry);
+          setPantry(getData);
         });
       } else if (message.msgBody === 'UnAuthorized') {
         authContext.setUser({ username: '', role: '' });
@@ -60,7 +68,9 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
           id='outlined-basic'
           options={searchOptions}
           getOptionLabel={(option) => option.food.label}
-          renderInput={(params) => <TextField {...params} label='Add item to pantry' margin="normal" />}
+          renderInput={(params) => (
+            <TextField {...params} label='Add item to pantry' margin='normal' />
+          )}
           variant='outlined'
           onInputChange={updateSearch}
           onChange={(e, v) => setItem(v)}
@@ -86,7 +96,7 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
     >
       {body}
     </Modal>
-  )
-}
+  );
+};
 
 export default AddItemModal;
