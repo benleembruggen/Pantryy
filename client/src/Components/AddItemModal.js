@@ -35,7 +35,7 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
   const [searchOptions, setSearchOptions] = useState([]);
   const [item, setItem] = useState(null);
   const [quantity, setQuantity] = useState(null);
-  const [selectedMeasure, setSelectedMeasure] = useState('Grams');
+  const [selectedMeasure, setSelectedMeasure] = useState('Whole');
 
   const updateSearch = (e) => {
     if (e.target.value && (e.target.value.includes('rick') || e.target.value.includes('roll'))) {
