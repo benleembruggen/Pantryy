@@ -8,7 +8,6 @@ const Pantry = (props) => {
   const [pantry, setPantry] = useState([]);
   const authContext = useContext(AuthContext);
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
 
   const updateSearch = (e) => {
     setSearch(e.target.value);
@@ -16,8 +15,7 @@ const Pantry = (props) => {
 
   const getSearch = (e) => {
     e.preventDefault();
-    setQuery(search);
-    PantryService.postItem(query).then((data) => {
+    PantryService.postItem(search).then((data) => {
       const { message } = data;
       if (!message.msgError) {
         PantryService.getPantry().then((getData) => {
@@ -28,8 +26,6 @@ const Pantry = (props) => {
         authContext.setIsAuthenticated(false);
       }
     });
-    setSearch('');
-    setQuery('');
   };
 
   useEffect(() => {
