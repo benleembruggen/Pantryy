@@ -1,0 +1,14 @@
+POST /pantry/item HTTP/1.1
+Host: localhost:5000
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MmMxNGM4MjZlMjM1NWI5NDBlMjUxIiwiaWF0IjoxNjE0OTkzNTkxLCJleHAiOjE2MTQ5OTcxOTF9.gN1c055lZ8c-XzUprtUJ_YIc_9yhQcch0GbzkGemeNo
+content-type: application/json
+
+{
+  "name": "eggplant"
+}
+
+###
+
+GET /pantry HTTP/1.1
+Host: localhost:5000
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MmMxNGM4MjZlMjM1NWI5NDBlMjUxIiwiaWF0IjoxNjE0OTkzNTkxLCJleHAiOjE2MTQ5OTcxOTF9.gN1c055lZ8c-XzUprtUJ_YIc_9yhQcch0GbzkGemeNo
