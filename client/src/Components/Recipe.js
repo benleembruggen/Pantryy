@@ -22,7 +22,7 @@ function Recipe() {
   const classes = useStyles();
 
   useEffect(() => {
-    RecipeService.getRecipes('pasta').then(setRecipes);
+    RecipeService.getRecipes('spaghetti').then(setRecipes);
   }, []);
 
   return (
@@ -42,7 +42,7 @@ function Recipe() {
           onSubmit={(searchText) =>
             RecipeService.getRecipes(searchText).then(setRecipes)
           }
-          placeholder='Search Recipes e.g. pasta'
+          placeholder='Search Recipes e.g. spaghetti'
         />
       </Paper>
       <Container>

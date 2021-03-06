@@ -1,9 +1,22 @@
+const sortListAlpha = (list) => {
+  console.log(list);
+  list.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getPantry: async () => {
     const response = await fetch('/pantry');
     if (response.status !== 401) {
-      return response.json().then((data) => data);
+      return response.json().then((data) => sortListAlpha(data.pantry));
     } else {
       return { message: { msgBody: 'UnAuthorized' }, msgError: true };
     }
