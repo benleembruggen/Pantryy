@@ -9,6 +9,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import EcoIcon from '@material-ui/icons/Eco'
 import WifiIcon from '@material-ui/icons/Wifi'
 import Wifi from '@material-ui/icons/Wifi';
+import { Tooltip } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,27 +81,33 @@ export default function RecipeList(props) {
                   {
                     tile.recipe.healthLabels.includes("Vegan") ?
                       (
+                        <Tooltip title="Vegan" placement="top">
                         <IconButton className={classes.strongIcon}>
                           <EcoIcon />
                         </IconButton>
+                        </Tooltip>
                       )
                       : (<></>)
                   }
                   {
                     tile.recipe.healthLabels.includes("Vegetarian") && ! tile.recipe.healthLabels.includes("Vegan")?
                       (
+                        <Tooltip title="Vegan" placement="top">
                         <IconButton className={classes.strongIcon}>
                           V
                         </IconButton>
+                        </Tooltip>
                       )
                       : (<></>)
                   }
                   {
                     tile.recipe.healthLabels.includes("Gluten-Free") ?
                       (
+                        <Tooltip title="Vegan" placement="top">
                         <IconButton className={classes.strongIcon}>
                           GF
                         </IconButton>
+                        </Tooltip>
                       )
                       : (<></>)
                   }
