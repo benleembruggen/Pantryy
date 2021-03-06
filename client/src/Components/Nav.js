@@ -13,113 +13,115 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { AuthContext } from '../Context/AuthContext';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100vw',
-    backgroundColor: 'black',
-    position: 'fixed',
-    left: '0',
-    bottom: '0',
-    '& > *': {
-      color: 'white',
+    root: {
+        width: '100vw',
+        backgroundColor: 'black',
+        position: 'fixed',
+        left: '0',
+        bottom: '0',
+        zIndex: 10,
+        '& > *': {
+            color: 'white',
+        },
+
     },
-  },
 });
 
 const Nav = () => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
 
-  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
-    AuthContext
-  );
-
-  const onClickLogoutHandler = () => {
-    AuthService.logout().then((data) => {
-      if (data.success) {
-        setUser(data.user);
-        setIsAuthenticated(false);
-      }
-    });
-  };
-
-  const authenticatedNavBar = () => {
-    return (
-      <>
-        <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-          className={classes.root}
-        >
-          <BottomNavigationAction
-            component={Link}
-            to='/'
-            label='Home'
-            icon={<HomeIcon />}
-          />
-          <BottomNavigationAction
-            component={Link}
-            to='/pantry'
-            label='Pantry'
-            icon={<KitchenIcon />}
-          />
-          <BottomNavigationAction
-            component={Link}
-            to='/recipe'
-            label='Recipe Search'
-            icon={<SearchIcon />}
-          />
-          <BottomNavigationAction
-            component={Link}
-            onClick={onClickLogoutHandler}
-            label='Logout'
-            to='/'
-            icon={<LogoutIcon />}
-          />
-        </BottomNavigation>
-      </>
+    const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
+        AuthContext
     );
-  };
 
-  const unAuthenticatedNavBar = () => {
+    const onClickLogoutHandler = () => {
+        AuthService.logout().then((data) => {
+            if (data.success) {
+                setUser(data.user);
+                setIsAuthenticated(false);
+            }
+        });
+    };
+
+    const authenticatedNavBar = () => {
+        return (
+            <>
+                <BottomNavigation
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                    showLabels
+                    className={classes.root}
+                >
+                    <BottomNavigationAction
+                        component={Link}
+                        to='/'
+                        label='Home'
+                        icon={<HomeIcon />}
+                    />
+                    <BottomNavigationAction
+                        component={Link}
+                        to='/pantry'
+                        label='Pantry'
+                        icon={<KitchenIcon />}
+                    />
+                    <BottomNavigationAction
+                        component={Link}
+                        to='/recipe'
+                        label='Recipe Search'
+                        icon={<SearchIcon />}
+                    />
+                    <BottomNavigationAction
+                        component={Link}
+                        onClick={onClickLogoutHandler}
+                        label='Logout'
+                        to='/'
+                        icon={<LogoutIcon />}
+                    />
+                </BottomNavigation>
+            </>
+        );
+    };
+
+    const unAuthenticatedNavBar = () => {
+        return (
+            <>
+                <BottomNavigation
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                    showLabels
+                    className={classes.root}
+                >
+                    <BottomNavigationAction
+                        component={Link}
+                        to='/'
+                        label='Home'
+                        icon={<HomeIcon />}
+                    />
+                    <BottomNavigationAction
+                        component={Link}
+                        to='/login'
+                        label='Login'
+                        icon={<LockOpenIcon />}
+                    />
+                    <BottomNavigationAction
+                        component={Link}
+                        to='/register'
+                        label='Register'
+                        icon={<PersonAddIcon />}
+                    />
+                </BottomNavigation>
+            </>
+        );
+    };
+
     return (
-      <>
-        <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-          className={classes.root}
-        >
-          <BottomNavigationAction
-            component={Link}
-            to='/'
-            label='Home'
-            icon={<HomeIcon />}
-          />
-          <BottomNavigationAction
-            component={Link}
-            to='/login'
-            label='Login'
-            icon={<LockOpenIcon />}
-          />
-          <BottomNavigationAction
-            component={Link}
-            to='/register'
-            label='Register'
-            icon={<PersonAddIcon />}
-          />
-        </BottomNavigation>
-      </>
+        <>{isAuthenticated ? authenticatedNavBar() : unAuthenticatedNavBar()}</>
     );
-  };
-
-  return (
-    <>{isAuthenticated ? authenticatedNavBar() : unAuthenticatedNavBar()}</>
-  );
 };
 
 export default Nav;
