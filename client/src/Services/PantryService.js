@@ -11,7 +11,7 @@ export default {
   postItem: async (item) => {
     const response = await fetch('/pantry/item', {
       method: 'post',
-      body: JSON.stringify({ name: item }),
+      body: JSON.stringify({ name: item, quantity: 1, unit: 'Gram' }),
       headers: {
         'Content-Type': 'application/json',
       },

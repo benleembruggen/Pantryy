@@ -28,27 +28,35 @@ pantryRouter.post(
   '/item',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
-    const { name } = req.body;
-    const { parsed } = await callFoodApi('food', { ingr: name });
-    if (parsed.length === 0) {
+    const { name, quantity, unit } = req.body;
+    const { hints } = await callFoodApi('food', { ingr: name });
+    console.log(hints);
+    if (hints.length === 0) {
       res.status(500).json({
         message: { msgBody: "Can't find item", msgError: true },
       });
       return;
     }
-    if (parsed.length > 1) {
-      res.status(500).json({
-        message: { msgBody: 'Ca', msgError: true },
-      });
-      return;
+    if (hints.length > 1) {
+      console.warn('More than one food returned, just using the first one');
     }
 
-    const { foodId, label, image } = parsed[0].food;
+    const { foodId, label, image } = hints[0].food;
+    const { measures } = hints[0];
+
+    const measureInfo = measures.find(({ label }) => label === unit);
+
+    if (!measureInfo) throw new Error('Invalid unit provided')
+
     const itemData = {
       name: label,
       foodId,
+      quantity,
+      preferredMeasure: unit,
+      weightPerMeasure: measureInfo.weight,
       img: `https://spoonacular.com/cdn/ingredients_100x100/${label.toLowerCase()}.jpg`,
     };
+
     const item = new Item(itemData);
     item.save((err) => {
       if (err)
