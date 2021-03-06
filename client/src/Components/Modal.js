@@ -24,25 +24,21 @@ const useStyles = makeStyles((theme) => ({
 const AddItemModal = ({ open, onClose, setPantry }) => {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
-  const [search, setSearch] = useState('');
   const [timerReference, setTimerReference] = useState(null);
   const [searchOptions, setSearchOptions] = useState([]);
+  const [item, setItem] = useState(null);
 
   const updateSearch = (e) => {
-    if (e.target.value.includes('rick') || e.target.value.includes('roll')) {
+    if (e.target.value && (e.target.value.includes('rick') || e.target.value.includes('roll'))) {
       window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     }
-    setSearch(e.target.value);
     clearTimeout(timerReference);
     setTimerReference(setTimeout(() => ItemService.suggestItems(e.target.value).then(setSearchOptions), 700)); //TODO: change to 100
   };
 
-  console.log(searchOptions);
-  console.log(search);
-
   const getSearch = (e) => {
     e.preventDefault();
-    PantryService.postItem(search).then((data) => {
+    PantryService.postItem(item.food.label).then((data) => {
       const { message } = data;
       if (!message.msgError) {
         PantryService.getPantry().then((getData) => {
@@ -67,6 +63,7 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
           renderInput={(params) => <TextField {...params} label='Add item to pantry' margin="normal" />}
           variant='outlined'
           onInputChange={updateSearch}
+          onChange={(e, v) => setItem(v)}
         />
         <br></br>
         <br></br>
