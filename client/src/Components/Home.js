@@ -11,7 +11,7 @@ import PantryService from '../Services/PantryService';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
+    marginTop: '25vh',
     justifyContent: 'center',
     margin: 'auto',
     width: `60vw`,
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
 }));
+
 
 function Home() {
   const [open, setOpen] = useState(false);
@@ -61,8 +62,8 @@ function Home() {
   };
 
   const body = (
-    <div style={classes.modalStyle} className={classes.paper}>
-      <h2>yeet</h2>
+    <div className={classes.paper}>
+      <h2>Add a item</h2>
       <form noValidate autoComplete='off'>
         <TextField
           id='outlined-basic'
@@ -82,7 +83,7 @@ function Home() {
       <Grid container spacing={3}>
         <Grid item xs>
           <div style={{ height: `10vh` }}>
-            <h2>NAME</h2>
+            <h2>Pantryy</h2>
             <Button onClick={openModal} variant='contained' color='primary'>
               Add item to pantry
             </Button>
