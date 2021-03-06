@@ -1,6 +1,6 @@
 import React from 'react';
-import Nav from './Nav';
 import Pantry from './Pantry';
+import Recipe from './Recipe';
 import Grid from '@material-ui/core/Grid';
 
 function Home() {
@@ -11,7 +11,7 @@ function Home() {
           <Pantry />
         </Grid>
         <Grid item xs={10}>
-
+          <Recipe />
         </Grid>
       </Grid>
     </>
