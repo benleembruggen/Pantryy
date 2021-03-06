@@ -11,10 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: 'white',
-    position: 'fixed',
     borderRadius: 0,
-    width: '100vw',
     left: 0
   },
 }));
@@ -25,11 +22,9 @@ function Recipe() {
   return (
     <>
       <Paper className={classes.root}>
-        <h1 style={{margin:0, color:'#ff91a4', textShadow:'1px 1px 1px #dddddd'}}>Recipe Page</h1>
+        <h1 style={{margin:0, color:'#ffffff', textShadow:'1px 1px 1px #000000'}}>Recipes</h1>
         <Search isLarge={true} placeholder="Search Recipes"/>
       </Paper>
-      <br/>
-      <br/>
       <Container >
         <br />
         <RecipeList />

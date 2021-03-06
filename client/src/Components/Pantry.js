@@ -11,6 +11,7 @@ import FoodIcon from '@material-ui/icons/Fastfood';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import AuthService from '../Services/AuthService';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +74,7 @@ const Pantry = (props) => {
   }, []);
 
   return (
-    <div>
+    <Paper elevation={3}>
       <div style={{ height: `10vh` }}>
         <p>NAME</p>
         <form onSubmit={getSearch} className='input-group mb-3'>
@@ -114,7 +115,7 @@ const Pantry = (props) => {
           Logout
         </Button>
       </div>
-    </div>
+    </Paper>
   );
 };
 

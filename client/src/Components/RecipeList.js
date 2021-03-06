@@ -44,37 +44,8 @@ let tileData = [
     url: 'https://google.com.au',
     url: ''
   },
-  {
-    img: 'https://media1.s-nbcnews.com/j/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p_d9270c5c545b30ea094084c7f2342eb4.fit-2000w.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://media1.s-nbcnews.com/j/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p_d9270c5c545b30ea094084c7f2342eb4.fit-2000w.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://media1.s-nbcnews.com/j/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p_d9270c5c545b30ea094084c7f2342eb4.fit-2000w.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://media1.s-nbcnews.com/j/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p_d9270c5c545b30ea094084c7f2342eb4.fit-2000w.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://media1.s-nbcnews.com/j/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p_d9270c5c545b30ea094084c7f2342eb4.fit-2000w.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  }
 ]
+
 export default function RecipeList() {
   const classes = useStyles();
 
