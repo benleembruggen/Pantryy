@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Recipe() {
-  const [recipes, setRecipes] = useState([])
+  const [recipes, setRecipes] = useState(null)
   const classes = useStyles();
   return (
     <>

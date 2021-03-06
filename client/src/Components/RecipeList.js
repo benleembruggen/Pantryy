@@ -47,11 +47,17 @@ let tileData = [
 
 export default function RecipeList(props) {
   const classes = useStyles();
-
+  console.log(props.recipes);
+  if(!props.recipes){
+    return(<p>Search for something!</p>)
+  }
+  if(props.recipes.length === 0){
+    return(<p>Your search returned no results :(</p>)
+  }
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList} cols={4}>
-        {props.recipes.map((tile) => (
+        { props.recipes.map((tile) => (
           <GridListTile key={tile.recipe.image}>
             <img src={tile.recipe.image} alt={tile.recipe.label} />
             <GridListTileBar
@@ -80,7 +86,8 @@ export default function RecipeList(props) {
               }
             />
           </GridListTile>
-        ))}
+        ))
+      }
       </GridList>
     </div>
   );
