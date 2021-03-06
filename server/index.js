@@ -34,3 +34,7 @@ app.use('/item', itemRouter);
 // pantry routes
 const pantryRouter = require('./routes/Pantry');
 app.use('/pantry', pantryRouter);
+
+// recipe routes
+const recipeRouter = require('./routes/Recipe');
+app.use('/recipe', recipeRouter);
