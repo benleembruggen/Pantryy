@@ -57,10 +57,7 @@ const Pantry = (props) => {
         {props.pantry.map((item) => (
           <>
             <ListItem button>
-              <ListItemIcon>
-                <FoodIcon />
-              </ListItemIcon>
-              <ListItemText primary={item.name} />
+              <ListItemText primary={`· ${item.name}`} />
             </ListItem>
           </>
         ))}
