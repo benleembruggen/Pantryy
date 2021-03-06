@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Nav from './Nav';
 import PantryService from '../Services/PantryService';
 import { AuthContext } from '../Context/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Pantry = (props) => {
   const [pantry, setPantry] = useState([]);
@@ -46,7 +47,6 @@ const Pantry = (props) => {
               className='card-img-top'
               src={item.img}
               alt={item.name}
-              width='10%'
             />
             <div className='card-body'>
               <h5 className='card-title'>{item.name}</h5>
@@ -55,7 +55,7 @@ const Pantry = (props) => {
           </div>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 
