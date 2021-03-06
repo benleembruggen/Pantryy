@@ -1,11 +1,19 @@
 import React from 'react';
 import Nav from './Nav';
+import Pantry from './Pantry';
+import Grid from '@material-ui/core/Grid';
 
 function Home() {
   return (
     <>
-      <Nav />
-      <h1>Home Page</h1>
+      <Grid container spacing={3}>
+        <Grid item xs>
+          <Pantry />
+        </Grid>
+        <Grid item xs={10}>
+
+        </Grid>
+      </Grid>
     </>
   );
 }
