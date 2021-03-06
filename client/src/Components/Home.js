@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function Home() {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
@@ -71,6 +70,11 @@ function Home() {
           variant='outlined'
           onChange={updateSearch}
         />
+        <br></br>
+        <br></br>
+        <TextField id='outlined-basic' label='Add amount' variant='outlined' />
+        <br></br>
+        <br></br>
         <Button variant='contained' color='primary' onClick={getSearch}>
           Add item
         </Button>
