@@ -92,7 +92,7 @@ export default function RecipeList(props) {
                   {
                     tile.recipe.healthLabels.includes("Vegetarian") && ! tile.recipe.healthLabels.includes("Vegan")?
                       (
-                        <Tooltip title="Vegan" placement="top">
+                        <Tooltip title="Vegetarian" placement="top">
                         <IconButton className={classes.strongIcon}>
                           V
                         </IconButton>
@@ -103,7 +103,7 @@ export default function RecipeList(props) {
                   {
                     tile.recipe.healthLabels.includes("Gluten-Free") ?
                       (
-                        <Tooltip title="Vegan" placement="top">
+                        <Tooltip title="Gluten Free" placement="top">
                         <IconButton className={classes.strongIcon}>
                           GF
                         </IconButton>
