@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Nav from './Nav';
 import PantryService from '../Services/PantryService';
 import { AuthContext } from '../Context/AuthContext';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import FoodIcon from '@material-ui/icons/Fastfood';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import AuthService from '../Services/AuthService';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
+  return <ListItem button component='a' {...props} />;
 }
 
 const Pantry = (props) => {
@@ -88,11 +87,15 @@ const Pantry = (props) => {
           <div className='input-group-append'>
             <button className='btn btn-primary' type='submit'>
               +
-          </button>
+            </button>
           </div>
         </form>
       </div>
-      <List component="nav" aria-label="main mailbox folders" style={{ overflow: "scroll", height: `80vh` }}>
+      <List
+        component='nav'
+        aria-label='main mailbox folders'
+        style={{ overflow: 'scroll', height: `80vh` }}
+      >
         <Divider />
         {pantry.map((item) => (
           <>
@@ -106,9 +109,10 @@ const Pantry = (props) => {
         ))}
       </List>
       <div style={{ height: `10vh` }}>
-        <IconButton aria-label="delete" onClick={onClickLogoutHandler}>
+        <Button aria-label='delete' onClick={onClickLogoutHandler}>
           <LogoutIcon />
-        </IconButton>
+          Logout
+        </Button>
       </div>
     </div>
   );
