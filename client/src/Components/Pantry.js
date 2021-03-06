@@ -10,11 +10,15 @@ const Pantry = (props) => {
   const [search, setSearch] = useState('');
 
   const updateSearch = (e) => {
+    if (e.target.value.includes('rick') || e.target.value.includes('roll')) {
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    }
     setSearch(e.target.value);
   };
 
   const getSearch = (e) => {
     e.preventDefault();
+
     PantryService.postItem(search).then((data) => {
       const { message } = data;
       if (!message.msgError) {
