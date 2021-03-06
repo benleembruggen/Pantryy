@@ -5,7 +5,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+import LinkIcon from '@material-ui/icons/Link';
 import EcoIcon from '@material-ui/icons/Eco'
 import WifiIcon from '@material-ui/icons/Wifi'
 import Wifi from '@material-ui/icons/Wifi';
@@ -67,8 +67,8 @@ export default function RecipeList(props) {
               titlePosition="top"
               subtitle={<span>by: {tile.recipe.source}</span>}
               actionIcon={
-                <IconButton className={classes.icon}>
-                  <InfoIcon />
+                <IconButton className={classes.icon} href={tile.recipe.url} target="_blank">
+                  <LinkIcon />
                 </IconButton>
               }
             />
