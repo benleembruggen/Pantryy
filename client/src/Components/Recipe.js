@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import Search from './Search';
 import RecipeList from './RecipeList';
@@ -13,22 +13,41 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     borderRadius: 0,
-    left: 0
+    left: 0,
   },
 }));
 
 function Recipe() {
-  const [recipes, setRecipes] = useState(null)
+  const [recipes, setRecipes] = useState(null);
   const classes = useStyles();
+
+  useEffect(() => {
+    RecipeService.getRecipes('pasta').then(setRecipes);
+  }, []);
+
   return (
     <>
       <Paper className={classes.root}>
-        <h1 style={{margin:0, color:'#ffffff', textShadow:'1px 1px 1px #000000'}}>Recipes</h1>
-        <Search isLarge={true} onSubmit={(searchText) => RecipeService.getRecipes(searchText).then(setRecipes)} placeholder="Search Recipes"/>
+        <h1
+          style={{
+            margin: 0,
+            color: '#ffffff',
+            textShadow: '1px 1px 1px #000000',
+          }}
+        >
+          Recipes
+        </h1>
+        <Search
+          isLarge={true}
+          onSubmit={(searchText) =>
+            RecipeService.getRecipes(searchText).then(setRecipes)
+          }
+          placeholder='Search Recipes e.g. pasta'
+        />
       </Paper>
-      <Container >
+      <Container>
         <br />
-        <RecipeList recipes={recipes}/>
+        <RecipeList recipes={recipes} />
       </Container>
     </>
   );
