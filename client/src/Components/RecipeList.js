@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import EcoIcon from '@material-ui/icons/Eco'
 import WifiIcon from '@material-ui/icons/Wifi'
+import Wifi from '@material-ui/icons/Wifi';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,18 +21,18 @@ const useStyles = makeStyles((theme) => ({
   },
   gridList: {
     width: '100vw',
-    height: 400,
+    height: '80vh',
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
-  strongIcon:{
+  strongIcon: {
     color: 'rbga(255,255,255,1)'
   },
-  bar:{
+  bar: {
     textAlign: 'left',
   },
-  underbar:{
+  underbar: {
     backgroundColor: 'rgba(0,0,0,0)'
   }
 }));
@@ -48,20 +49,20 @@ let tileData = [
 export default function RecipeList(props) {
   const classes = useStyles();
   console.log(props.recipes);
-  if(!props.recipes){
-    return(<p>Search for something!</p>)
+  if (!props.recipes) {
+    return (<p>Search for something!</p>)
   }
-  if(props.recipes.length === 0){
-    return(<p>Your search returned no results :(</p>)
+  if (props.recipes.length === 0) {
+    return (<p>Your search returned no results :(</p>)
   }
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList} cols={4}>
-        { props.recipes.map((tile) => (
+        {props.recipes.map((tile) => (
           <GridListTile key={tile.recipe.image}>
             <img src={tile.recipe.image} alt={tile.recipe.label} />
             <GridListTileBar
-            className={classes.bar}
+              className={classes.bar}
               title={tile.recipe.label}
               titlePosition="top"
               subtitle={<span>by: {tile.recipe.source}</span>}
@@ -72,22 +73,43 @@ export default function RecipeList(props) {
               }
             />
             <GridListTileBar
-            className={classes.underbar}
+              className={classes.underbar}
               titlePosition="bottom"
               actionIcon={
                 <>
-                  <IconButton className={classes.strongIcon}>
-                    <EcoIcon />
-                  </IconButton>
-                  <IconButton className={classes.strongIcon}>
-                    <WifiIcon />
-                  </IconButton>
+                  {
+                    tile.recipe.healthLabels.includes("Vegan") ?
+                      (
+                        <IconButton className={classes.strongIcon}>
+                          <EcoIcon />
+                        </IconButton>
+                      )
+                      : (<></>)
+                  }
+                  {
+                    tile.recipe.healthLabels.includes("Vegetarian") ?
+                      (
+                        <IconButton className={classes.strongIcon}>
+                          V
+                        </IconButton>
+                      )
+                      : (<></>)
+                  }
+                  {
+                    tile.recipe.healthLabels.includes("Gluten-Free") ?
+                      (
+                        <IconButton className={classes.strongIcon}>
+                          GF
+                        </IconButton>
+                      )
+                      : (<></>)
+                  }
                 </>
               }
             />
           </GridListTile>
         ))
-      }
+        }
       </GridList>
     </div>
   );
