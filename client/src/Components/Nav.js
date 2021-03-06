@@ -75,6 +75,7 @@ const Nav = () => {
             component={Link}
             onClick={onClickLogoutHandler}
             label='Logout'
+            to='/'
             icon={<LogoutIcon />}
           />
         </BottomNavigation>
