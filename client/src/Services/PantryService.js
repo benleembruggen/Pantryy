@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getPantry: async () => {
-    const response = await fetch('/user/pantry');
+    const response = await fetch('/pantry');
     if (response.status !== 401) {
       return response.json().then((data) => data);
     } else {
@@ -9,9 +9,9 @@ export default {
     }
   },
   postItem: async (item) => {
-    const response = await fetch('/user/item', {
+    const response = await fetch('/pantry/item', {
       method: 'post',
-      body: JSON.stringify(item),
+      body: JSON.stringify({ name: item }),
       headers: {
         'Content-Type': 'application/json',
       },
