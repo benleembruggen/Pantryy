@@ -7,6 +7,8 @@ import { AuthContext } from '../Context/AuthContext';
 import PantryService from '../Services/PantryService';
 import { Autocomplete } from '@material-ui/lab';
 import ItemService from '../Services/ItemService';
+import { SUPPORTED_MEASURES } from '../utils/measures';
+import { MenuItem, Select } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,14 +37,16 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
   const [searchOptions, setSearchOptions] = useState([]);
   const [item, setItem] = useState(null);
   const [quantity, setQuantity] = useState(null);
-  const [selectedMeasure, setSelectedMeasure] = useState('Whole');
+  // Using empty string defaults to the first option
+  const [selectedMeasure, setSelectedMeasure] = useState('');
+  const [availableMeasures, setAvailableMeasures] = useState([SUPPORTED_MEASURES.WHOLE]);
 
-  const updateSearch = (e) => {
+  const updateSearch = (e, v, reason) => {
     if (e.target.value && (e.target.value.includes('rick') || e.target.value.includes('roll'))) {
       window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     }
     clearTimeout(timerReference);
-    setTimerReference(setTimeout(() => ItemService.suggestItems(e.target.value).then(setSearchOptions), 700)); //TODO: change to 100
+    if (reason === 'input') setTimerReference(setTimeout(() => ItemService.suggestItems(e.target.value).then(setSearchOptions), 700)); //TODO: change to 100
   };
 
   const getSearch = (e) => {
@@ -61,6 +65,12 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
     onClose();
   };
 
+  const onSelectItem = (e, v) => {
+    setItem(v);
+    const supportedMeasures = v.measures.filter(({ label }) => Object.values(SUPPORTED_MEASURES).includes(label));
+    setAvailableMeasures(supportedMeasures.map(({ label }) => label));
+  }
+
   const body = (
     <div className={classes.paper}>
       <h2>Add a item</h2>
@@ -72,13 +82,19 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
           renderInput={(params) => <TextField {...params} label='Add item to pantry' margin="normal" />}
           variant='outlined'
           onInputChange={updateSearch}
-          onChange={(e, v) => setItem(v)}
+          onChange={onSelectItem}
         />
         <br></br>
         <br></br>
         <div className={classes.amountDiv}>
           <TextField id='outlined-basic' label='Add amount' variant='outlined' onChange={e => setQuantity(e.target.value)} />
-          <p className={classes.measure}>g</p>
+          <Select
+            value={selectedMeasure || 'Gram'}
+            onChange={(e) => setSelectedMeasure(e.target.value)}
+            className={classes.measure}
+          >
+            {availableMeasures.map(label => <MenuItem value={label}>{label}</MenuItem>)}
+          </Select>
         </div>
         <br></br>
         <br></br>
