@@ -46,7 +46,7 @@ const Register = (props) => {
             if (isAuthenticated) {
               authContext.setUser(user);
               authContext.setIsAuthenticated(isAuthenticated);
-              props.history.push('/pantry');
+              props.history.push('/home');
             } else {
             }
           });
