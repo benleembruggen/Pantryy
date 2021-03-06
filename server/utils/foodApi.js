@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const querystring = require('querystring');
 
-const BASE_URL = 'https://api.edamam.com/api';
+const BASE_URL = 'https://api.edamam.com/';
 
 const APP_AUTH = {
   food: {
@@ -15,7 +15,8 @@ const APP_AUTH = {
 }
 
 const endpointAliases = {
-  'food': '/food-database/v2/parser',
+  food: 'api/food-database/v2/parser',
+  recipeSearch: 'search',
 }
 
 const callFoodApi = async (endpoint, parameters) => {
@@ -36,7 +37,7 @@ const buildUrl = (endpoint, parameters) => {
     ...parameters,
   }
 
-  return `${BASE_URL}${translatedEndpoint}?${querystring.stringify(params)}`;
+  return `${BASE_URL}/${translatedEndpoint}?${querystring.stringify(params)}`;
 }
 
 module.exports = { callFoodApi };
