@@ -26,10 +26,6 @@ function ListItemLink(props) {
 }
 
 const Pantry = (props) => {
-  const [pantry, setPantry] = useState([]);
-  const authContext = useContext(AuthContext);
-  const [search, setSearch] = useState('');
-
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
     AuthContext
   );
@@ -43,32 +39,9 @@ const Pantry = (props) => {
     });
   };
 
-  const updateSearch = (e) => {
-    if (e.target.value.includes('rick') || e.target.value.includes('roll')) {
-      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-    }
-    setSearch(e.target.value);
-  };
-
-  const getSearch = (e) => {
-    e.preventDefault();
-
-    PantryService.postItem(search).then((data) => {
-      const { message } = data;
-      if (!message.msgError) {
-        PantryService.getPantry().then((getData) => {
-          setPantry(getData.pantry);
-        });
-      } else if (message.msgBody === 'UnAuthorized') {
-        authContext.setUser({ username: '', role: '' });
-        authContext.setIsAuthenticated(false);
-      }
-    });
-  };
-
   useEffect(() => {
     PantryService.getPantry().then((data) => {
-      setPantry(data.pantry);
+      props.setPantry(data.pantry);
       console.log(data.pantry);
     });
   }, []);
@@ -98,7 +71,7 @@ const Pantry = (props) => {
         style={{ overflow: 'scroll', height: `80vh` }}
       >
         <Divider />
-        {pantry.map((item) => (
+        {props.pantry.map((item) => (
           <>
             <ListItem button>
               <ListItemIcon>
@@ -111,6 +84,7 @@ const Pantry = (props) => {
       </List>
       <div style={{ height: `10vh` }}>
         <Button aria-label='delete' onClick={onClickLogoutHandler}>
+          <br></br>
           <LogoutIcon />
           Logout
         </Button>
