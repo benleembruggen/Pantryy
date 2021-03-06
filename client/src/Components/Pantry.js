@@ -8,7 +8,6 @@ const Pantry = (props) => {
   const [pantry, setPantry] = useState([]);
   const authContext = useContext(AuthContext);
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('pasta');
 
   const updateSearch = (e) => {
     setSearch(e.target.value);
@@ -16,8 +15,17 @@ const Pantry = (props) => {
 
   const getSearch = (e) => {
     e.preventDefault();
-    setQuery(search);
-    setSearch('');
+    PantryService.postItem(search).then((data) => {
+      const { message } = data;
+      if (!message.msgError) {
+        PantryService.getPantry().then((getData) => {
+          setPantry(getData.pantry);
+        });
+      } else if (message.msgBody === 'UnAuthorized') {
+        authContext.setUser({ username: '', role: '' });
+        authContext.setIsAuthenticated(false);
+      }
+    });
   };
 
   useEffect(() => {
@@ -42,17 +50,18 @@ const Pantry = (props) => {
         <div className='input-group-append'>
           <button className='btn btn-primary' type='submit'>
             +
-            </button>
+          </button>
         </div>
       </form>
-      <div className='card-columns'>
+      <div
+        className='card-columns'
+        style={{
+          columnCount: '5',
+        }}
+      >
         {pantry.map((item) => (
           <div className='card'>
-            <img
-              className='card-img-top'
-              src={item.img}
-              alt={item.name}
-            />
+            <img className='card-img-top' src={item.img} alt={item.name} />
             <div className='card-body'>
               <h5 className='card-title'>{item.name}</h5>
               <p className='card-text'>{item.id}</p>
@@ -60,7 +69,7 @@ const Pantry = (props) => {
           </div>
         ))}
       </div>
-    </div >
+    </div>
   );
 };
 

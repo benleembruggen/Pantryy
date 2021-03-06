@@ -38,7 +38,7 @@ pantryRouter.post(
     }
     if (parsed.length > 1) {
       res.status(500).json({
-        message: { msgBody: "Ca", msgError: true },
+        message: { msgBody: 'Ca', msgError: true },
       });
       return;
     }
@@ -47,7 +47,7 @@ pantryRouter.post(
     const itemData = {
       name: label,
       foodId,
-      img: image,
+      img: `https://spoonacular.com/cdn/ingredients_100x100/${label.toLowerCase()}.jpg`,
     };
     const item = new Item(itemData);
     item.save((err) => {
