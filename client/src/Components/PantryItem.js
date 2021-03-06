@@ -7,8 +7,9 @@ import { quantityToString } from '../utils/measures';
 const PantryItem = ({ item }) => {
   return (
     <ListItem button>
+      {/* <img src={item.img} width={47} height={47} /> */}
       <ListItemText primary={`· ${item.name}`} />
-      <ListItemText primary={quantityToString(item.quantity, item.preferredMeasure)} />
+      <ListItemText style={{ textAlign: 'right' }} primary={quantityToString(item.quantity, item.preferredMeasure)} />
     </ListItem>
   )
 }
