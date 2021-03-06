@@ -22,6 +22,18 @@ const Pantry = (props) => {
     AuthContext
   );
 
+  const sortListAlpha = (list) => {
+    list.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
   const onClickLogoutHandler = () => {
     AuthService.logout().then((data) => {
       if (data.success) {
@@ -33,8 +45,8 @@ const Pantry = (props) => {
 
   useEffect(() => {
     PantryService.getPantry().then((data) => {
-      props.setPantry(data.pantry);
-      console.log(data.pantry);
+      props.setPantry(data);
+      console.log(data);
     });
   }, []);
 
