@@ -48,23 +48,6 @@ const Pantry = (props) => {
 
   return (
     <Paper elevation={3}>
-      <div style={{ height: `10vh` }}>
-        <p>NAME</p>
-        <form onSubmit={getSearch} className='input-group mb-3'>
-          <input
-            className='form-control'
-            type='text'
-            value={search}
-            onChange={updateSearch}
-            placeholder='Add item to pantry'
-          />
-          <div className='input-group-append'>
-            <button className='btn btn-primary' type='submit'>
-              +
-            </button>
-          </div>
-        </form>
-      </div>
       <List
         component='nav'
         aria-label='main mailbox folders'
