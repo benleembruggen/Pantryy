@@ -6,6 +6,8 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import EcoIcon from '@material-ui/icons/Eco'
+import WifiIcon from '@material-ui/icons/Wifi'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,55 +16,36 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    zIndex: 0
   },
   gridList: {
     width: '100vw',
-    height: 300,
+    height: 400,
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  strongIcon:{
+    color: 'rbga(255,255,255,1)'
+  },
+  bar:{
+    textAlign: 'left',
+  },
+  underbar:{
+    backgroundColor: 'rgba(0,0,0,0)'
+  }
 }));
 
 let tileData = [
   {
-    img: 'https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
+    img: 'https://media1.s-nbcnews.com/j/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p_d9270c5c545b30ea094084c7f2342eb4.fit-2000w.jpg',
     title: 'Banana',
     source: 'Mark',
     url: 'https://google.com.au',
     url: ''
   },
-  {
-    img: 'https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  },
-  {
-    img: 'https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
-    title: 'Banana',
-    source: 'Mark',
-    url: 'https://google.com.au'
-  }
 ]
+
 export default function RecipeList() {
   const classes = useStyles();
 
@@ -73,6 +56,7 @@ export default function RecipeList() {
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
+            className={classes.bar}
               title={tile.title}
               titlePosition="top"
               subtitle={<span>by: {tile.source}</span>}
@@ -80,6 +64,20 @@ export default function RecipeList() {
                 <IconButton className={classes.icon}>
                   <InfoIcon />
                 </IconButton>
+              }
+            />
+            <GridListTileBar
+            className={classes.underbar}
+              titlePosition="bottom"
+              actionIcon={
+                <>
+                  <IconButton className={classes.strongIcon}>
+                    <EcoIcon />
+                  </IconButton>
+                  <IconButton className={classes.strongIcon}>
+                    <WifiIcon />
+                  </IconButton>
+                </>
               }
             />
           </GridListTile>

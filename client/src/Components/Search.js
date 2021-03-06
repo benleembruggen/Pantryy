@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { AuthContext } from '../Context/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   rootL: {
@@ -11,15 +12,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     width: 400,
-    margin: 'auto',
     borderRadius: 100,
+    height: 35,
+    margin: 'auto 2px',
+    zIndex: 10
   },
   rootS: {
     padding:'2px 5px',
     display: 'flex',
     alignItems: 'center',
     width: 200,
-    margin: 'auto',
     borderRadius: 100,
   },
   input: {

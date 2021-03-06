@@ -13,6 +13,18 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  preferredMeasure: {
+    type: String,
+    required: true,
+  },
+  weightPerMeasure: {
+    type: Number,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('Item', ItemSchema);
