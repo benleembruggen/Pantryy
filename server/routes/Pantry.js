@@ -51,10 +51,10 @@ pantryRouter.post(
     const itemData = {
       name: label,
       foodId,
-      img: image,
       quantity,
       preferredMeasure: unit,
       weightPerMeasure: measureInfo.weight,
+      img: `https://spoonacular.com/cdn/ingredients_100x100/${label.toLowerCase()}.jpg`,
     };
 
     const item = new Item(itemData);
