@@ -12,6 +12,18 @@ import LogoutIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import AuthService from '../Services/AuthService';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+function ListItemLink(props) {
+  return <ListItem button component='a' {...props} />;
+}
+
 const Pantry = (props) => {
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
     AuthContext
