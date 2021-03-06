@@ -26,3 +26,7 @@ mongoose.set('useFindAndModify', false);
 // user routes
 const userRouter = require('./routes/User');
 app.use('/user', userRouter);
+
+// item routes
+const itemRouter = require('./routes/Item');
+app.use('/item', itemRouter);
