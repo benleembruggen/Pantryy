@@ -11,19 +11,19 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AuthService from '../Services/AuthService';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { AuthContext } from '../Context/AuthContext';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
     root: {
         width: '100vw',
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         position: 'fixed',
         left: '0',
         bottom: '0',
         zIndex: 10,
         '& > *': {
-            color: 'white',
+            color: 'grey',
         },
-
     },
 });
 
@@ -48,6 +48,7 @@ const Nav = () => {
         return (
             <>
                 <BottomNavigation
+                    component={Paper}
                     value={value}
                     onChange={(event, newValue) => {
                         setValue(newValue);
