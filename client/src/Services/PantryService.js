@@ -8,10 +8,10 @@ export default {
       return { message: { msgBody: 'UnAuthorized' }, msgError: true };
     }
   },
-  postItem: async (task) => {
+  postItem: async (item) => {
     const response = await fetch('/user/item', {
       method: 'post',
-      body: JSON.stringify(task),
+      body: JSON.stringify(item),
       headers: {
         'Content-Type': 'application/json',
       },
