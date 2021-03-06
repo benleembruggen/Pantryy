@@ -24,7 +24,6 @@ function Recipe() {
   const classes = useStyles();
   return (
     <>
-      <Nav />
       <Paper className={classes.root}>
         <h1 style={{margin:0, color:'#ff91a4', textShadow:'1px 1px 1px #dddddd'}}>Recipe Page</h1>
         <Search isLarge={true} placeholder="Search Recipes"/>
