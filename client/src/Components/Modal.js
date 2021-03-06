@@ -19,6 +19,13 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  amountDiv: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  measure: {
+    margin: 'auto 30px',
+  }
 }));
 
 const AddItemModal = ({ open, onClose, setPantry }) => {
@@ -27,6 +34,8 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
   const [timerReference, setTimerReference] = useState(null);
   const [searchOptions, setSearchOptions] = useState([]);
   const [item, setItem] = useState(null);
+  const [quantity, setQuantity] = useState(null);
+  const [selectedMeasure, setSelectedMeasure] = useState('Grams');
 
   const updateSearch = (e) => {
     if (e.target.value && (e.target.value.includes('rick') || e.target.value.includes('roll'))) {
@@ -38,7 +47,7 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
 
   const getSearch = (e) => {
     e.preventDefault();
-    PantryService.postItem(item.food.label).then((data) => {
+    PantryService.postItem(item, quantity, selectedMeasure).then((data) => {
       const { message } = data;
       if (!message.msgError) {
         PantryService.getPantry().then((getData) => {
@@ -67,7 +76,10 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
         />
         <br></br>
         <br></br>
-        <TextField id='outlined-basic' label='Add amount' variant='outlined' />
+        <div className={classes.amountDiv}>
+          <TextField id='outlined-basic' label='Add amount' variant='outlined' onChange={e => setQuantity(e.target.value)} />
+          <p className={classes.measure}>g</p>
+        </div>
         <br></br>
         <br></br>
         <Button variant='contained' color='primary' onClick={getSearch}>
