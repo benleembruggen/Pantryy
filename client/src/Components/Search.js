@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -39,11 +39,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Search( props ) {
   const classes = useStyles();
-
+  const [inputText, setInputText] = useState([])
   return (
     <Paper component="form" className={props.isLarge ? classes.rootL : classes.rootS}>
-      <InputBase className={classes.input} placeholder={props.placeholder}/>
-      <IconButton type="submit" className={props.isLarge ? classes.iconL : classes.iconS}>
+      <InputBase onChange={(event) => setInputText(event.target.value)} className={classes.input} placeholder={props.placeholder}/>
+      <IconButton onClick={() => props.onSubmit(inputText)} className={props.isLarge ? classes.iconL : classes.iconS}>
         <SearchIcon />
       </IconButton>
     </Paper>

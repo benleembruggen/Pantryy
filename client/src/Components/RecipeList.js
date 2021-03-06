@@ -42,24 +42,23 @@ let tileData = [
     title: 'Banana',
     source: 'Mark',
     url: 'https://google.com.au',
-    url: ''
   },
 ]
 
-export default function RecipeList() {
+export default function RecipeList(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList} cols={4}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+        {props.recipes.map((tile) => (
+          <GridListTile key={tile.recipe.image}>
+            <img src={tile.recipe.image} alt={tile.recipe.label} />
             <GridListTileBar
             className={classes.bar}
-              title={tile.title}
+              title={tile.recipe.label}
               titlePosition="top"
-              subtitle={<span>by: {tile.source}</span>}
+              subtitle={<span>by: {tile.recipe.source}</span>}
               actionIcon={
                 <IconButton className={classes.icon}>
                   <InfoIcon />
