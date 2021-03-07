@@ -7,7 +7,7 @@ import { AuthContext } from '../Context/AuthContext';
 import { Autocomplete } from '@material-ui/lab';
 import ItemService from '../Services/ItemService';
 import Divider from '@material-ui/core/Divider';
-import AddIcon from '@material-ui/icons/Add';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +40,7 @@ const RecipeModal = ({ open, onClose, recipe, pantry }) => {
                         return <p style={{ color: '#7EF571' }}>{ingredient.text}</p>
                     }
                 }
-                return <p style={{ color: '#f55d58' }}>{ingredient.text}<IconButton size="small"><AddIcon /></IconButton></p>
+                return <p style={{ color: '#f55d58' }}>{ingredient.text}<IconButton size="small"><AddShoppingCartIcon /></IconButton></p>
             })}
         </div>
     );
