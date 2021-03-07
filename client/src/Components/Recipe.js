@@ -2,50 +2,78 @@ import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import Search from './Search';
 import RecipeList from './RecipeList';
-import Nav from './Nav';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import RecipeService from '../Services/RecipeService';
+import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    borderRadius: 0,
-    left: 0,
-  },
+    justifyContent: "space-between",
+    flexDirection: "row",
+  }
 }));
 
 function Recipe() {
   const [recipes, setRecipes] = useState(null);
+  const [searchText, setSearchText] = useState("spaghetti")
+  const [checkboxStates, setCheckboxStates] = React.useState({
+    vegetarian: false,
+    vegan: false,
+    glutenFree: false,
+  });
   const classes = useStyles();
 
+  // Handles changing checkboxes
+  const handleChange = (event) => {
+    const newCheckboxState ={ ...checkboxStates, [event.target.name]: event.target.checked };
+    setCheckboxStates(newCheckboxState);
+    sendSearchReq(searchText, newCheckboxState);
+  };
+
+  // Auto search for pasta on page load
   useEffect(() => {
     RecipeService.getRecipes('spaghetti').then(setRecipes);
   }, []);
 
+  // Search function
+  const sendSearchReq = (searchText, searchFilters) =>{
+    RecipeService.getRecipes(searchText).then(recipes => {
+      const filteredRecipes = recipes.filter((recipe) => {
+        if(searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
+        if(searchFilters.vegan && !recipe.recipe.healthLabels.includes('Vegan')) return false;
+        if(searchFilters.glutenFree && !recipe.recipe.healthLabels.includes('Gluten-Free')) return false;
+        return true;
+      });
+      setRecipes(filteredRecipes);
+      console.log("done",searchFilters)
+     });
+  }
+
   return (
     <>
-      <Paper className={classes.root}>
-        <h1
-          style={{
-            margin: 0,
-            color: '#ffffff',
-            textShadow: '1px 1px 1px #000000',
-          }}
-        >
-          Recipes
-        </h1>
-        <Search
-          isLarge={true}
-          onSubmit={(searchText) =>
-            RecipeService.getRecipes(searchText).then(setRecipes)
-          }
-          placeholder='Search Recipes e.g. spaghetti'
-        />
-      </Paper>
-      <Container>
+    <br></br><br></br>
+        <Container>
+      <FormGroup className={classes.root}>
+      <FormControlLabel
+        control={<Checkbox name="vegetarian" checked={checkboxStates.vegetarian} onChange={handleChange}/>}
+        label="Vegetarian"
+      />
+            <FormControlLabel
+        control={<Checkbox name="vegan" checked={checkboxStates.vegan} onChange={handleChange}/>}
+        label="Vegan"
+      />
+            <FormControlLabel
+        control={<Checkbox name="glutenFree" checked={checkboxStates.glutenFree} onChange={handleChange}/>}
+        label="Gluten-Free"
+      />
+      <Search isLarge={true} onSubmit={(searchText) => {
+        setSearchText(searchText);
+        sendSearchReq(searchText, checkboxStates);
+      }} placeholder='Search Recipes e.g. pasta'/>
+      </FormGroup>
         <br />
         <RecipeList recipes={recipes} />
       </Container>

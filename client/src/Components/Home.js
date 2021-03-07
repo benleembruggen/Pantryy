@@ -3,7 +3,7 @@ import Pantry from './Pantry';
 import Recipe from './Recipe';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import AddItemModal from './Modal';
+import AddItemModal from './AddItemModal';
 
 function Home() {
   const [open, setOpen] = useState(false);

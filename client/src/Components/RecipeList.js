@@ -60,7 +60,7 @@ export default function RecipeList(props) {
       setPantry(data);
     })
   })
-
+  
   if (!props.recipes) {
     return (<p>Search for something!</p>)
   }
