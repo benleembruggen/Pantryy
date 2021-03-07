@@ -16,7 +16,6 @@ export default {
   getCart: async () => {
     const response = await fetch('/cart');
     if (response.status !== 401) {
-      // response.json().then(console.log);
       return response.json().then((data) => sortListAlpha(data.cart || []));
     } else {
       return { message: { msgBody: 'UnAuthorized' }, msgError: true };

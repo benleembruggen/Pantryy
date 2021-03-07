@@ -18,7 +18,6 @@ cartRouter.get(
             message: { msgBody: 'Error fetching cart', msgError: true },
           });
         else {
-          console.log(document);
           res.status(200).json({ cart: document.cart, authenticate: true });
         }
       });
@@ -32,7 +31,9 @@ cartRouter.post(
     const { name, quantity: stringQuantity, measure } = req.body;
     const quantity = parseFloat(stringQuantity);
 
-    const { cart } = await User.findById({ _id: req.user._id }).populate('cart');
+    const { cart } = await User.findById({ _id: req.user._id }).populate(
+      'cart'
+    );
 
     const { hints } = await callFoodApi('food', { ingr: name });
     if (hints.length === 0) {
@@ -48,10 +49,14 @@ cartRouter.post(
     const { foodId, label } = hints[0].food;
     const { measures } = hints[0];
 
-    const duplicateItem = cart.find(({ name: existingItemName }) => label === existingItemName);
+    const duplicateItem = cart.find(
+      ({ name: existingItemName }) => label === existingItemName
+    );
 
     if (duplicateItem && duplicateItem.preferredMeasure === measure) {
-      await Item.findByIdAndUpdate(duplicateItem._id, { quantity: duplicateItem.quantity + quantity });
+      await Item.findByIdAndUpdate(duplicateItem._id, {
+        quantity: duplicateItem.quantity + quantity,
+      });
       res.status(200).json({
         message: {
           msgBody: 'Successfully updated item',
@@ -63,7 +68,7 @@ cartRouter.post(
 
     const measureInfo = measures.find(({ label }) => label === measure);
 
-    if (!measureInfo) throw new Error('Invalid measure provided')
+    if (!measureInfo) throw new Error('Invalid measure provided');
 
     const itemData = {
       name: label,

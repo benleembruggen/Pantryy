@@ -4,7 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import { AuthContext } from '../Context/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   rootL: {
@@ -15,10 +14,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 100,
     height: 35,
     margin: 'auto 2px',
-    zIndex: 10
+    zIndex: 10,
   },
   rootS: {
-    padding:'2px 5px',
+    padding: '2px 5px',
     display: 'flex',
     alignItems: 'center',
     width: 200,
@@ -32,18 +31,28 @@ const useStyles = makeStyles((theme) => ({
   iconL: {
     padding: 4,
   },
-  iconS:{
+  iconS: {
     padding: 0,
   },
 }));
 
-export default function Search( props ) {
+export default function Search(props) {
   const classes = useStyles();
-  const [inputText, setInputText] = useState([])
+  const [inputText, setInputText] = useState([]);
   return (
-    <Paper component="form" className={props.isLarge ? classes.rootL : classes.rootS}>
-      <InputBase onChange={(event) => setInputText(event.target.value)} className={classes.input} placeholder={props.placeholder}/>
-      <IconButton onClick={() => props.onSubmit(inputText)} className={props.isLarge ? classes.iconL : classes.iconS}>
+    <Paper
+      component='form'
+      className={props.isLarge ? classes.rootL : classes.rootS}
+    >
+      <InputBase
+        onChange={(event) => setInputText(event.target.value)}
+        className={classes.input}
+        placeholder={props.placeholder}
+      />
+      <IconButton
+        onClick={() => props.onSubmit(inputText)}
+        className={props.isLarge ? classes.iconL : classes.iconS}
+      >
         <SearchIcon />
       </IconButton>
     </Paper>

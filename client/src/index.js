@@ -7,11 +7,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 const theme = createMuiTheme({
   palette: {
-    type: "dark",
+    type: 'dark',
     primary: {
       main: '#F55860',
-    }
-  }
+    },
+  },
 });
 
 ReactDOM.render(

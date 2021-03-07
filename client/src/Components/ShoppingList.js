@@ -1,18 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PantryService from '../Services/PantryService';
-import { AuthContext } from '../Context/AuthContext';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import LogoutIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
-import AuthService from '../Services/AuthService';
 import Paper from '@material-ui/core/Paper';
 import PantryItem from './PantryItem';
-import { shoppingList } from '../utils/getShoppingList';
 import CartService from '../Services/CartService';
 
+// eslint-disable-next-line
 function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
 }
@@ -28,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     overflowY: 'scroll',
-    height: `calc(90vh - 50px)`
+    height: `calc(90vh - 50px)`,
   },
   button: {
     height: '50px',
-  }
+  },
 }));
 
 const ShoppingList = ({ open, setCart, cart }) => {
@@ -40,7 +36,8 @@ const ShoppingList = ({ open, setCart, cart }) => {
 
   useEffect(() => {
     CartService.getCart().then(setCart);
-  }, [])
+    // eslint-disable-next-line
+  }, []);
 
   if (!open) return null;
 
@@ -52,10 +49,14 @@ const ShoppingList = ({ open, setCart, cart }) => {
         className={classes.list}
       >
         <Divider />
-        {cart.map((item) => <PantryItem item={item} />)}
+        {cart.map((item) => (
+          <PantryItem item={item} />
+        ))}
       </List>
-      <Button className={classes.button}>Order from coles</Button>
-    </Paper >
+      <Button className={classes.button} color='primary'>
+        Order from coles
+      </Button>
+    </Paper>
   );
 };
 
