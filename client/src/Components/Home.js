@@ -22,12 +22,13 @@ function Home() {
               <h2>Pantryy</h2>
             </div>
           </div>
-          <Pantry pantry={pantry} setPantry={setPantry} />
+          <Pantry pantry={pantry} setPantry={setPantry} setItemModalOpen={setOpen} />
         </Grid>
         <Grid item xs={10}>
           <Recipe onOpenShoppingList={setCartOpen} />
         </Grid>
       </Grid>
+      <AddItemModal style={{ position: 'fixed' }} open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
     </>
   );
 }

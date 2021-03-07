@@ -18,8 +18,6 @@ function ListItemLink(props) {
 }
 
 const Pantry = (props) => {
-  const [pantry, setPantry] = useState([]);
-  const [open, setOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
     AuthContext
   );
@@ -41,10 +39,9 @@ const Pantry = (props) => {
 
   return (
     <Paper elevation={3}>
-      <Button onClick={() => setOpen(true)} variant='contained' color='primary' style={{marginTop: '3px', height: '5vh'}}>
-      Add item to pantry
+      <Button onClick={() => props.setItemModalOpen(true)} variant='contained' color='primary' style={{ marginTop: '3px', height: '5vh' }}>
+        Add item to pantry
       </Button>
-      <AddItemModal style={{position: 'fixed'}} open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
       <List
         component='nav'
         aria-label='main mailbox folders'
