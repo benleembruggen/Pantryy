@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import RecipeModal from './RecipeModal';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
@@ -10,6 +11,7 @@ import EcoIcon from '@material-ui/icons/Eco'
 import WifiIcon from '@material-ui/icons/Wifi'
 import Wifi from '@material-ui/icons/Wifi';
 import { Tooltip } from '@material-ui/core';
+import PantryService from '../Services/PantryService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +51,16 @@ let tileData = [
 
 export default function RecipeList(props) {
   const classes = useStyles();
-  //console.log(props.recipes);
+  const [recipes, setRecipes] = useState(props.recipes);
+  const [openModal, setOpenModal] = useState('-1');
+  const [pantry, setPantry] = useState();
+
+  useEffect(() => {
+    PantryService.getPantry().then((data) => {
+      setPantry(data);
+    })
+  })
+  
   if (!props.recipes) {
     return (<p>Search for something!</p>)
   }
@@ -59,8 +70,9 @@ export default function RecipeList(props) {
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList} cols={4}>
-        {props.recipes.map((tile) => (
-          <GridListTile key={tile.recipe.image}>
+        {props.recipes.map((tile, index) => (
+          <GridListTile key={tile.recipe.image} onClick={() => { setOpenModal(`${index}`) }}>
+            <RecipeModal open={openModal == `${index}`} onClose={() => setOpenModal('-1')} recipe={tile} pantry={pantry} />
             <img src={tile.recipe.image} alt={tile.recipe.label} />
             <GridListTileBar
               className={classes.bar}
@@ -82,19 +94,19 @@ export default function RecipeList(props) {
                     tile.recipe.healthLabels.includes("Vegan") ?
                       (
                         <Tooltip title="Vegan" placement="top">
-                        <IconButton className={classes.strongIcon}>
-                          <EcoIcon />
-                        </IconButton>
+                          <IconButton className={classes.strongIcon}>
+                            <EcoIcon />
+                          </IconButton>
                         </Tooltip>
                       )
                       : (<></>)
                   }
                   {
-                    tile.recipe.healthLabels.includes("Vegetarian") && ! tile.recipe.healthLabels.includes("Vegan")?
+                    tile.recipe.healthLabels.includes("Vegetarian") && !tile.recipe.healthLabels.includes("Vegan") ?
                       (
                         <Tooltip title="Vegetarian" placement="top">
-                        <IconButton className={classes.strongIcon}>
-                          V
+                          <IconButton className={classes.strongIcon}>
+                            V
                         </IconButton>
                         </Tooltip>
                       )
@@ -104,8 +116,8 @@ export default function RecipeList(props) {
                     tile.recipe.healthLabels.includes("Gluten-Free") ?
                       (
                         <Tooltip title="Gluten Free" placement="top">
-                        <IconButton className={classes.strongIcon}>
-                          GF
+                          <IconButton className={classes.strongIcon}>
+                            GF
                         </IconButton>
                         </Tooltip>
                       )

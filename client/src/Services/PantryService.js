@@ -1,5 +1,4 @@
 const sortListAlpha = (list) => {
-  console.log(list);
   list.sort((a, b) => {
     if (a.name < b.name) {
       return -1;

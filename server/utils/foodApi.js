@@ -21,7 +21,6 @@ const endpointAliases = {
 
 const callFoodApi = async (endpoint, parameters) => {
   const urlToFetch = buildUrl(endpoint, parameters);
-  console.log('Fetching: ', urlToFetch);
   const response = await fetch(urlToFetch);
   return response.json();
 }

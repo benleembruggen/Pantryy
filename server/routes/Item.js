@@ -11,9 +11,7 @@ itemRouter.get(
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     const { name } = req.query;
-    console.log(name);
     const { hints } = await callFoodApi('food', { ingr: name });
-    console.log(name, hints);
     // We need return the preferred measures here too.
     res.json(hints);
   }
