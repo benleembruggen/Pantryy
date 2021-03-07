@@ -17,32 +17,27 @@ function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
 }
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   root: {
     position: 'absolute',
     left: 'calc(100% - 250px)',
-    // float: 'right',
     top: '10vh',
     width: '250px',
     height: '90vh',
     zIndex: 100,
-    // background: '#042331',
-    // transition: 'all 0.5s ease',
-  },
-  title: {
-    margin: '5px',
   },
   list: {
     overflowY: 'scroll',
     height: `calc(90vh - 50px)`
   },
-  headingDiv: {
-    // fontFamily: 'Lobster',
-    // color: '#f59b90'
-  },
-}
+  button: {
+    height: '50px',
+  }
+}));
 
 const ShoppingList = ({ open, setCart, cart }) => {
+  const classes = useStyles();
+
   useEffect(() => {
     CartService.getCart().then(setCart);
   }, [])
@@ -50,16 +45,16 @@ const ShoppingList = ({ open, setCart, cart }) => {
   if (!open) return null;
 
   return (
-    <Paper elevation={3} style={styles.root}>
+    <Paper elevation={3} className={classes.root}>
       <List
         component='nav'
         aria-label='main mailbox folders'
-        style={styles.list}
+        className={classes.list}
       >
         <Divider />
         {cart.map((item) => <PantryItem item={item} />)}
       </List>
-      <Button style={{ height: '50px' }}>Order food</Button>
+      <Button className={classes.button}>Order from coles</Button>
     </Paper >
   );
 };
