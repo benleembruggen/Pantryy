@@ -1,6 +1,6 @@
 GET /recipe/search HTTP/1.1
 Host: localhost:5000
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MWU5ZDUyYmE3Y2RmYTAwN2IxZmUxIiwiaWF0IjoxNjE0OTk3NjQ4LCJleHAiOjE2MTUwMDEyNDh9.7R6PYU-eesT7C2YCM-6BAdvygP-IQgcQ6BWV9t_QRsw
+Cookie: access_token=
 content-type: application/json
 
 {

@@ -8,6 +8,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 const theme = createMuiTheme({
   palette: {
     type: "dark",
+    primary: {
+      main: '#F55860',
+    }
   }
 });
 
@@ -17,6 +20,6 @@ ReactDOM.render(
       <CssBaseline />
       <App />
     </AuthProvider>
-  </ThemeProvider >,
+  </ThemeProvider>,
   document.getElementById('root')
 );

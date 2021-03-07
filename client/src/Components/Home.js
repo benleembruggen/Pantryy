@@ -24,21 +24,18 @@ function Home() {
       <ShoppingList cart={cart} setCart={setCart} open={cartOpen} style={{ float: 'right' }} />
       <Grid container spacing={3}>
         <Grid item xs>
-          <div style={{ height: `10vh` }}>
+          <div style={{ height: `7vh` }}>
             <div style={{ fontFamily: 'Lobster', color: '#f59b90' }}>
-              <h2>Pantryy</h2>
+              <h2 style={{paddingTop: '5px'}}>Pantryy</h2>
             </div>
-            <Button onClick={() => setOpen(true)} variant='contained' color='primary'>
-              Add item to pantry
-            </Button>
           </div>
-          <Pantry pantry={pantry} setPantry={setPantry} />
+          <Pantry pantry={pantry} setPantry={setPantry} setItemModalOpen={setOpen} />
         </Grid>
         <Grid item xs={10}>
           <Recipe cartOpen={cartOpen} refreshCart={refreshCart} onOpenShoppingList={toggleCartOpen} />
         </Grid>
       </Grid>
-      <AddItemModal open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
+      <AddItemModal style={{ position: 'fixed' }} open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
     </>
   );
 }
