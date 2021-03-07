@@ -11,6 +11,7 @@ import AuthService from '../Services/AuthService';
 import Paper from '@material-ui/core/Paper';
 import PantryItem from './PantryItem';
 import { shoppingList } from '../utils/getShoppingList';
+import CartService from '../Services/CartService';
 
 function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
@@ -41,6 +42,12 @@ const styles = {
 }
 
 const ShoppingList = ({ open, setOpen }) => {
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    CartService.getCart().then(setCart);
+  }, [])
+
   if (!open) return null;
 
   return (
@@ -59,7 +66,7 @@ const ShoppingList = ({ open, setOpen }) => {
         style={styles.list}
       >
         <Divider />
-        {shoppingList.map((item) => <PantryItem item={item} />)}
+        {cart.map((item) => <PantryItem item={item} />)}
       </List>
     </Paper >
   );

@@ -1,12 +1,12 @@
-POST /pantry/item HTTP/1.1
+POST /cart/item HTTP/1.1
 Host: localhost:5000
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MWU5ZDUyYmE3Y2RmYTAwN2IxZmUxIiwiaWF0IjoxNjE1MDEyMjc2LCJleHAiOjE2MTUwMTU4NzZ9.e5npGNN0korD3BxDMrm6efDxBROzC5eqID9mWOETpkE
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MWU5ZDUyYmE3Y2RmYTAwN2IxZmUxIiwiaWF0IjoxNjE1MDg2MjMzLCJleHAiOjE2MTUwODk4MzN9.DX21Nts__IHbjc23s85hQhQ2T4pbaORsDkbvn410-IQ
 content-type: application/json
 
 {
   "name": "eggplant",
   "quantity": 1,
-  "unit": "Whole"
+  "measure": "Whole"
 }
 
 ###
