@@ -8,17 +8,23 @@ import RecipeService from '../Services/RecipeService';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     justifyContent: "space-between",
     flexDirection: "row",
+  },
+  loading: {
+    zIndex: theme.zIndex.drawer + 1,
   }
 }));
 
 function Recipe(props) {
   const [recipes, setRecipes] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("spaghetti")
   const [checkboxStates, setCheckboxStates] = React.useState({
     vegetarian: false,
@@ -36,11 +42,13 @@ function Recipe(props) {
 
   // Auto search for pasta on page load
   useEffect(() => {
-    RecipeService.getRecipes('spaghetti').then(setRecipes);
+    sendSearchReq('spaghetti', checkboxStates)
+    //RecipeService.getRecipes('spaghetti').then(setRecipes);
   }, []);
 
   // Search function
   const sendSearchReq = (searchText, searchFilters) => {
+    setLoading(true);
     RecipeService.getRecipes(searchText).then(recipes => {
       const filteredRecipes = recipes.filter((recipe) => {
         if (searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
@@ -49,6 +57,7 @@ function Recipe(props) {
         return true;
       });
       setRecipes(filteredRecipes);
+      setLoading(false);
     });
   }
 
@@ -76,7 +85,7 @@ function Recipe(props) {
           <Button onClick={props.onOpenShoppingList}> Open cart </Button>
         </FormGroup>
         <br />
-        <RecipeList recipes={recipes} />
+        {isLoading ? <><CircularProgress /><br /><br /><br /><br /></> : <RecipeList recipes={recipes} />}
       </Container>
     </>
   );
