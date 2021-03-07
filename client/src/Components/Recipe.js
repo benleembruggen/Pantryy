@@ -8,6 +8,7 @@ import RecipeService from '../Services/RecipeService';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Recipe() {
+function Recipe(props) {
   const [recipes, setRecipes] = useState(null);
   const [state, setState] = React.useState({
     checkVegetarian: true,
@@ -43,36 +44,37 @@ function Recipe() {
   }, []);
 
   // Search function
-  const sendSearchReq = (searchFilters) =>{
+  const sendSearchReq = (searchFilters) => {
     RecipeService.getRecipes(searchFilters.searchText).then(res => {
       recipes = res;
       recipes.filter((recipe) => {
-        if(searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
-        if(searchFilters.vegan && !recipe.recipe.healthLabels.includes('Vegan')) return false;
-        if(searchFilters.glutenFree && !recipe.recipe.healthLabels.includes('Gluten-Free')) return false;
+        if (searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
+        if (searchFilters.vegan && !recipe.recipe.healthLabels.includes('Vegan')) return false;
+        if (searchFilters.glutenFree && !recipe.recipe.healthLabels.includes('Gluten-Free')) return false;
       })
-     });
+    });
   }
 
   return (
     <>
-    <br></br><br></br>
-        <Container>
-      <FormGroup className={classes.root}>
-      <FormControlLabel
-        control={<Checkbox name="checkVegetarian" checked={state.checkVegetarian} onChange={handleChange}/>}
-        label="Vegetarian"
-      />
-            <FormControlLabel
-        control={<Checkbox name="checkVegan" checked={state.checkVegan} onChange={handleChange}/>}
-        label="Vegan"
-      />
-            <FormControlLabel
-        control={<Checkbox name="checkGlutenFree" checked={state.checkGlutenFree} onChange={handleChange}/>}
-        label="Gluten-Free"
-      />
-      <Search isLarge={true} onSubmit={(searchText) => RecipeService.getRecipes(searchText).then(setRecipes)} placeholder='Search Recipes e.g. pasta'/>
-      </FormGroup>
+      <br></br><br></br>
+      <Container>
+        <FormGroup className={classes.root}>
+          <FormControlLabel
+            control={<Checkbox name="checkVegetarian" checked={state.checkVegetarian} onChange={handleChange} />}
+            label="Vegetarian"
+          />
+          <FormControlLabel
+            control={<Checkbox name="checkVegan" checked={state.checkVegan} onChange={handleChange} />}
+            label="Vegan"
+          />
+          <FormControlLabel
+            control={<Checkbox name="checkGlutenFree" checked={state.checkGlutenFree} onChange={handleChange} />}
+            label="Gluten-Free"
+          />
+          <Search isLarge={true} onSubmit={(searchText) => RecipeService.getRecipes(searchText).then(setRecipes)} placeholder='Search Recipes e.g. pasta' />
+          <Button onClick={props.onOpenShoppingList}> Open cart </Button>
+        </FormGroup>
         <br />
         <RecipeList recipes={recipes} />
       </Container>

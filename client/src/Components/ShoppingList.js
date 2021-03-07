@@ -10,51 +10,38 @@ import Button from '@material-ui/core/Button';
 import AuthService from '../Services/AuthService';
 import Paper from '@material-ui/core/Paper';
 import PantryItem from './PantryItem';
+import { shoppingList } from '../utils/getShoppingList';
 
 function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
 }
 
-const Pantry = (props) => {
-  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
-    AuthContext
-  );
+const style = {
+  position: 'absolute',
+  left: 'calc(100% - 250px)',
+  // float: 'right',
+  width: '250px',
+  height: '100%',
+  // zIndex: -100,
+  background: '#042331',
+  // transition: 'all 0.5s ease',
+}
 
-  const onClickLogoutHandler = () => {
-    AuthService.logout().then((data) => {
-      if (data.success) {
-        setUser(data.user);
-        setIsAuthenticated(false);
-      }
-    });
-  };
-
-  useEffect(() => {
-    PantryService.getPantry().then((data) => {
-      props.setPantry(data);
-      console.log(data);
-    });
-  }, []);
+const ShoppingList = ({ open, setOpen }) => {
+  if (!open) return null;
 
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} style={style}>
       <List
         component='nav'
         aria-label='main mailbox folders'
         style={{ overflow: 'scroll', height: `80vh` }}
       >
         <Divider />
-        {props.pantry.map((item) => <PantryItem item={item} />)}
+        {shoppingList.map((item) => <PantryItem item={item} />)}
       </List>
-      <div style={{ height: `10vh` }}>
-        <Button aria-label='delete' onClick={onClickLogoutHandler}>
-          <br></br>
-          <LogoutIcon />
-          Logout
-        </Button>
-      </div>
     </Paper>
   );
 };
 
-export default Pantry;
+export default ShoppingList;
