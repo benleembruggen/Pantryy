@@ -53,7 +53,7 @@ export default function RecipeList(props) {
   const classes = useStyles();
   const [recipes, setRecipes] = useState(props.recipes);
   const [openModal, setOpenModal] = useState('-1');
-  const [pantry, setPantry] = useState();
+  const [pantry, setPantry] = useState([]);
 
   useEffect(() => {
     PantryService.getPantry().then((data) => {
