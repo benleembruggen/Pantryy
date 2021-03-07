@@ -20,6 +20,6 @@ ReactDOM.render(
       <CssBaseline />
       <App />
     </AuthProvider>
-  </ThemeProvider >,
+  </ThemeProvider>,
   document.getElementById('root')
 );
