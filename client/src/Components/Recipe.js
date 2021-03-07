@@ -39,7 +39,7 @@ function Recipe() {
 
   // Auto search for pasta on page load
   useEffect(() => {
-    RecipeService.getRecipes('pasta').then(setRecipes);
+    RecipeService.getRecipes('spaghetti').then(setRecipes);
   }, []);
 
   // Search function

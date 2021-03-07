@@ -1,17 +1,31 @@
+const sortListAlpha = (list) => {
+  console.log(list);
+  list.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+  return list;
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getPantry: async () => {
     const response = await fetch('/pantry');
     if (response.status !== 401) {
-      return response.json().then((data) => data);
+      return response.json().then((data) => sortListAlpha(data.pantry));
     } else {
       return { message: { msgBody: 'UnAuthorized' }, msgError: true };
     }
   },
-  postItem: async (item) => {
+  postItem: async (item, quantity, measure) => {
     const response = await fetch('/pantry/item', {
       method: 'post',
-      body: JSON.stringify({ name: item, quantity: 1, unit: 'Gram' }),
+      body: JSON.stringify({ name: item.food.label, quantity, measure }),
       headers: {
         'Content-Type': 'application/json',
       },
