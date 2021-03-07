@@ -22,6 +22,7 @@ const styles = {
     position: 'absolute',
     left: 'calc(100% - 250px)',
     // float: 'right',
+    down: '50px',
     width: '250px',
     height: '100vh',
     zIndex: 100,
@@ -32,8 +33,8 @@ const styles = {
     margin: '5px',
   },
   list: {
-    overflow: 'scroll',
-    height: `100vh`
+    overflowY: 'scroll',
+    height: `80vh`
   },
   headingDiv: {
     // fontFamily: 'Lobster',

@@ -40,7 +40,7 @@ const Pantry = (props) => {
       <List
         component='nav'
         aria-label='main mailbox folders'
-        style={{ overflow: 'scroll', height: `80vh` }}
+        style={{ overflowY: 'scroll', height: `80vh` }}
       >
         <Divider />
         {props.pantry.map((item) => <PantryItem item={item} />)}
