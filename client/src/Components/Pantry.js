@@ -54,7 +54,6 @@ const Pantry = (props) => {
   useEffect(() => {
     PantryService.getPantry().then((data) => {
       props.setPantry(data);
-      console.log(data);
     });
   }, []);
 
