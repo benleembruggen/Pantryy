@@ -78,6 +78,7 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
     setItem(v);
     const supportedMeasures = v.measures.filter(({ label }) => Object.values(SUPPORTED_MEASURES).includes(label));
     setAvailableMeasures(supportedMeasures.map(({ label }) => label));
+    setSelectedMeasure(supportedMeasures?.[0]?.label || '');
   }
 
   const body = (
@@ -98,9 +99,9 @@ const AddItemModal = ({ open, onClose, setPantry }) => {
         <br></br>
         <br></br>
         <div className={classes.amountDiv}>
-          <TextField id='outlined-basic' label='Add amount' variant='outlined' onChange={e => setQuantity(e.target.value)} />
+          <TextField type='number' id='outlined-basic' label='Add amount' variant='outlined' onChange={e => setQuantity(e.target.value)} />
           <Select
-            value={selectedMeasure || 'Gram'}
+            value={selectedMeasure}
             onChange={(e) => setSelectedMeasure(e.target.value)}
             className={classes.measure}
           >
