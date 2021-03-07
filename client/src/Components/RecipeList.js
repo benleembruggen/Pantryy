@@ -60,7 +60,7 @@ export default function RecipeList(props) {
       setPantry(data);
     })
   })
-  
+
   if (!props.recipes) {
     return (<p>Search for something!</p>)
   }
@@ -72,7 +72,7 @@ export default function RecipeList(props) {
       <GridList cellHeight={180} className={classes.gridList} cols={4}>
         {props.recipes.map((tile, index) => (
           <GridListTile key={tile.recipe.image} onClick={() => { setOpenModal(`${index}`) }}>
-            <RecipeModal open={openModal == `${index}`} onClose={() => setOpenModal('-1')} recipe={tile} pantry={pantry} />
+            <RecipeModal open={openModal == `${index}`} onClose={() => { setOpenModal('-1'); props.refreshCart() }} recipe={tile} pantry={pantry} />
             <img src={tile.recipe.image} alt={tile.recipe.label} />
             <GridListTileBar
               className={classes.bar}

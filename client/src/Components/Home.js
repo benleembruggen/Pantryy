@@ -5,16 +5,23 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddItemModal from './AddItemModal';
 import ShoppingList from './ShoppingList';
+import CartService from '../Services/CartService';
 
 function Home() {
   const [open, setOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
+  const [cartOpen, setCartOpenness] = useState(false);
   const [pantry, setPantry] = useState([]);
+  const [cart, setCart] = useState([]);
 
+  const toggleCartOpen = () => setCartOpenness(!cartOpen);
+
+  const refreshCart = () => {
+    CartService.getCart().then(setCart);
+  }
 
   return (
     <>
-      <ShoppingList open={cartOpen} setOpen={setCartOpen} style={{ float: 'right' }} />
+      <ShoppingList cart={cart} setCart={setCart} open={cartOpen} style={{ float: 'right' }} />
       <Grid container spacing={3}>
         <Grid item xs>
           <div style={{ height: `7vh` }}>
@@ -25,7 +32,7 @@ function Home() {
           <Pantry pantry={pantry} setPantry={setPantry} setItemModalOpen={setOpen} />
         </Grid>
         <Grid item xs={10}>
-          <Recipe onOpenShoppingList={setCartOpen} />
+          <Recipe cartOpen={cartOpen} refreshCart={refreshCart} onOpenShoppingList={toggleCartOpen} />
         </Grid>
       </Grid>
       <AddItemModal style={{ position: 'fixed' }} open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
