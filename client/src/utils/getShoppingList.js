@@ -1,9 +1,13 @@
 
 export const shoppingList = [
   {
-    label: 'Apple',
+    name: 'Apple',
+    quantity: 2,
+    preferredMeasure: 'Whole'
   },
   {
-    label: 'Banana',
+    name: 'Banana',
+    quantity: 100,
+    preferredMeasure: 'Gram'
   },
 ]
