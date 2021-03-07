@@ -10,12 +10,16 @@ import Button from '@material-ui/core/Button';
 import AuthService from '../Services/AuthService';
 import Paper from '@material-ui/core/Paper';
 import PantryItem from './PantryItem';
+import AddItemModal from './AddItemModal';
+
 
 function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
 }
 
 const Pantry = (props) => {
+  const [pantry, setPantry] = useState([]);
+  const [open, setOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
     AuthContext
   );
@@ -37,10 +41,14 @@ const Pantry = (props) => {
 
   return (
     <Paper elevation={3}>
+      <Button onClick={() => setOpen(true)} variant='contained' color='primary' style={{marginTop: '3px', height: '5vh'}}>
+      Add item to pantry
+      </Button>
+      <AddItemModal style={{position: 'fixed'}} open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
       <List
         component='nav'
         aria-label='main mailbox folders'
-        style={{ overflow: 'scroll', height: `80vh` }}
+        style={{ overflow: 'scroll', height: `75vh` }}
       >
         <Divider />
         {props.pantry.map((item) => <PantryItem item={item} />)}

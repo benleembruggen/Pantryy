@@ -21,9 +21,6 @@ function Home() {
             <div style={{ fontFamily: 'Lobster', color: '#f59b90' }}>
               <h2>Pantryy</h2>
             </div>
-            <Button onClick={() => setOpen(true)} variant='contained' color='primary'>
-              Add item to pantry
-            </Button>
           </div>
           <Pantry pantry={pantry} setPantry={setPantry} />
         </Grid>
@@ -31,7 +28,6 @@ function Home() {
           <Recipe onOpenShoppingList={setCartOpen} />
         </Grid>
       </Grid>
-      <AddItemModal open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
     </>
   );
 }
