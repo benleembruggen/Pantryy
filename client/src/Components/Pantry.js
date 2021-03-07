@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button';
 import AuthService from '../Services/AuthService';
 import Paper from '@material-ui/core/Paper';
 import PantryItem from './PantryItem';
+import AddItemModal from './AddItemModal';
+
 
 function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
@@ -37,10 +39,13 @@ const Pantry = (props) => {
 
   return (
     <Paper elevation={3}>
+      <Button onClick={() => props.setItemModalOpen(true)} variant='contained' color='primary' style={{ marginTop: '3px', height: '5vh' }}>
+        Add item to pantry
+      </Button>
       <List
         component='nav'
         aria-label='main mailbox folders'
-        style={{ overflow: 'scroll', height: `80vh` }}
+        style={{ overflow: 'scroll', height: `75vh` }}
       >
         <Divider />
         {props.pantry.map((item) => <PantryItem item={item} />)}
