@@ -8,6 +8,7 @@ import RecipeService from '../Services/RecipeService';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Recipe() {
+function Recipe(props) {
   const [recipes, setRecipes] = useState(null);
   const [searchText, setSearchText] = useState("spaghetti")
   const [checkboxStates, setCheckboxStates] = React.useState({
@@ -28,7 +29,7 @@ function Recipe() {
 
   // Handles changing checkboxes
   const handleChange = (event) => {
-    const newCheckboxState ={ ...checkboxStates, [event.target.name]: event.target.checked };
+    const newCheckboxState = { ...checkboxStates, [event.target.name]: event.target.checked };
     setCheckboxStates(newCheckboxState);
     sendSearchReq(searchText, newCheckboxState);
   };
@@ -39,41 +40,42 @@ function Recipe() {
   }, []);
 
   // Search function
-  const sendSearchReq = (searchText, searchFilters) =>{
+  const sendSearchReq = (searchText, searchFilters) => {
     RecipeService.getRecipes(searchText).then(recipes => {
       const filteredRecipes = recipes.filter((recipe) => {
-        if(searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
-        if(searchFilters.vegan && !recipe.recipe.healthLabels.includes('Vegan')) return false;
-        if(searchFilters.glutenFree && !recipe.recipe.healthLabels.includes('Gluten-Free')) return false;
+        if (searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
+        if (searchFilters.vegan && !recipe.recipe.healthLabels.includes('Vegan')) return false;
+        if (searchFilters.glutenFree && !recipe.recipe.healthLabels.includes('Gluten-Free')) return false;
         return true;
       });
       setRecipes(filteredRecipes);
-      console.log("done",searchFilters)
-     });
+      console.log("done", searchFilters)
+    });
   }
 
   return (
     <>
-    <br></br><br></br>
-        <Container>
-      <FormGroup className={classes.root}>
-      <FormControlLabel
-        control={<Checkbox name="vegetarian" checked={checkboxStates.vegetarian} onChange={handleChange}/>}
-        label="Vegetarian"
-      />
-            <FormControlLabel
-        control={<Checkbox name="vegan" checked={checkboxStates.vegan} onChange={handleChange}/>}
-        label="Vegan"
-      />
-            <FormControlLabel
-        control={<Checkbox name="glutenFree" checked={checkboxStates.glutenFree} onChange={handleChange}/>}
-        label="Gluten-Free"
-      />
-      <Search isLarge={true} onSubmit={(searchText) => {
-        setSearchText(searchText);
-        sendSearchReq(searchText, checkboxStates);
-      }} placeholder='Search Recipes e.g. pasta'/>
-      </FormGroup>
+      <br></br><br></br>
+      <Container>
+        <FormGroup className={classes.root}>
+          <FormControlLabel
+            control={<Checkbox name="vegetarian" checked={checkboxStates.vegetarian} onChange={handleChange} />}
+            label="Vegetarian"
+          />
+          <FormControlLabel
+            control={<Checkbox name="vegan" checked={checkboxStates.vegan} onChange={handleChange} />}
+            label="Vegan"
+          />
+          <FormControlLabel
+            control={<Checkbox name="glutenFree" checked={checkboxStates.glutenFree} onChange={handleChange} />}
+            label="Gluten-Free"
+          />
+          <Search isLarge={true} onSubmit={(searchText) => {
+            setSearchText(searchText);
+            sendSearchReq(searchText, checkboxStates);
+          }} placeholder='Search Recipes e.g. pasta' />
+          <Button onClick={props.onOpenShoppingList}> Open cart </Button>
+        </FormGroup>
         <br />
         <RecipeList recipes={recipes} />
       </Container>

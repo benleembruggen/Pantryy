@@ -4,8 +4,6 @@ import { AuthContext } from '../Context/AuthContext';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
@@ -21,18 +19,6 @@ const Pantry = (props) => {
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(
     AuthContext
   );
-
-  const sortListAlpha = (list) => {
-    list.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
-  };
 
   const onClickLogoutHandler = () => {
     AuthService.logout().then((data) => {

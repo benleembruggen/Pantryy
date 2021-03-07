@@ -4,13 +4,17 @@ import Recipe from './Recipe';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddItemModal from './AddItemModal';
+import ShoppingList from './ShoppingList';
 
 function Home() {
   const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [pantry, setPantry] = useState([]);
+
 
   return (
     <>
+      <ShoppingList open={cartOpen} setOpen={setCartOpen} style={{ float: 'right' }} />
       <Grid container spacing={3}>
         <Grid item xs>
           <div style={{ height: `10vh` }}>
@@ -24,7 +28,7 @@ function Home() {
           <Pantry pantry={pantry} setPantry={setPantry} />
         </Grid>
         <Grid item xs={10}>
-          <Recipe />
+          <Recipe onOpenShoppingList={setCartOpen} />
         </Grid>
       </Grid>
       <AddItemModal open={open} onClose={() => setOpen(false)} setPantry={setPantry} />
