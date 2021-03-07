@@ -10,6 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Recipe() {
+function Recipe(props) {
   const [recipes, setRecipes] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("spaghetti")
@@ -34,7 +35,7 @@ function Recipe() {
 
   // Handles changing checkboxes
   const handleChange = (event) => {
-    const newCheckboxState ={ ...checkboxStates, [event.target.name]: event.target.checked };
+    const newCheckboxState = { ...checkboxStates, [event.target.name]: event.target.checked };
     setCheckboxStates(newCheckboxState);
     sendSearchReq(searchText, newCheckboxState);
   };
@@ -50,9 +51,9 @@ function Recipe() {
     setLoading(true);
     RecipeService.getRecipes(searchText).then(recipes => {
       const filteredRecipes = recipes.filter((recipe) => {
-        if(searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
-        if(searchFilters.vegan && !recipe.recipe.healthLabels.includes('Vegan')) return false;
-        if(searchFilters.glutenFree && !recipe.recipe.healthLabels.includes('Gluten-Free')) return false;
+        if (searchFilters.vegetarian && !recipe.recipe.healthLabels.includes('Vegetarian')) return false;
+        if (searchFilters.vegan && !recipe.recipe.healthLabels.includes('Vegan')) return false;
+        if (searchFilters.glutenFree && !recipe.recipe.healthLabels.includes('Gluten-Free')) return false;
         return true;
       });
       setRecipes(filteredRecipes);
@@ -62,26 +63,27 @@ function Recipe() {
 
   return (
     <>
-    <br></br><br></br>
-        <Container>
-      <FormGroup className={classes.root}>
-      <FormControlLabel
-        control={<Checkbox name="vegetarian" checked={checkboxStates.vegetarian} onChange={handleChange}/>}
-        label="Vegetarian"
-      />
-            <FormControlLabel
-        control={<Checkbox name="vegan" checked={checkboxStates.vegan} onChange={handleChange}/>}
-        label="Vegan"
-      />
-            <FormControlLabel
-        control={<Checkbox name="glutenFree" checked={checkboxStates.glutenFree} onChange={handleChange}/>}
-        label="Gluten-Free"
-      />
-      <Search isLarge={true} onSubmit={(searchText) => {
-        setSearchText(searchText);
-        sendSearchReq(searchText, checkboxStates);
-      }} placeholder='Search Recipes e.g. pasta'/>
-      </FormGroup>
+      <br></br><br></br>
+      <Container>
+        <FormGroup className={classes.root}>
+          <FormControlLabel
+            control={<Checkbox name="vegetarian" checked={checkboxStates.vegetarian} onChange={handleChange} />}
+            label="Vegetarian"
+          />
+          <FormControlLabel
+            control={<Checkbox name="vegan" checked={checkboxStates.vegan} onChange={handleChange} />}
+            label="Vegan"
+          />
+          <FormControlLabel
+            control={<Checkbox name="glutenFree" checked={checkboxStates.glutenFree} onChange={handleChange} />}
+            label="Gluten-Free"
+          />
+          <Search isLarge={true} onSubmit={(searchText) => {
+            setSearchText(searchText);
+            sendSearchReq(searchText, checkboxStates);
+          }} placeholder='Search Recipes e.g. pasta' />
+          <Button onClick={props.onOpenShoppingList}> Open cart </Button>
+        </FormGroup>
         <br />
         {isLoading ? <><CircularProgress/><br/><br/><br/><br/></>: <RecipeList recipes={recipes} />}
       </Container>
