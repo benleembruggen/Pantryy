@@ -18,6 +18,7 @@ cartRouter.get(
             message: { msgBody: 'Error fetching cart', msgError: true },
           });
         else {
+          console.log(document);
           res.status(200).json({ cart: document.cart, authenticate: true });
         }
       });

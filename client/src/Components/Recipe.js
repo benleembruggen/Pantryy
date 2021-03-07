@@ -49,7 +49,6 @@ function Recipe(props) {
         return true;
       });
       setRecipes(filteredRecipes);
-      console.log("done", searchFilters)
     });
   }
 
