@@ -49,7 +49,7 @@ let tileData = [
 
 export default function RecipeList(props) {
   const classes = useStyles();
-  console.log(props.recipes);
+  //console.log(props.recipes);
   if (!props.recipes) {
     return (<p>Search for something!</p>)
   }
