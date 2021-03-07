@@ -1,6 +1,6 @@
 POST /cart/item HTTP/1.1
 Host: localhost:5000
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MWU5ZDUyYmE3Y2RmYTAwN2IxZmUxIiwiaWF0IjoxNjE1MDg2MjMzLCJleHAiOjE2MTUwODk4MzN9.DX21Nts__IHbjc23s85hQhQ2T4pbaORsDkbvn410-IQ
+Cookie: access_token=
 content-type: application/json
 
 {
@@ -13,4 +13,4 @@ content-type: application/json
 
 GET /pantry HTTP/1.1
 Host: localhost:5000
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1bmloYWNrIiwic3ViIjoiNjA0MmMxNGM4MjZlMjM1NWI5NDBlMjUxIiwiaWF0IjoxNjE0OTkzNTkxLCJleHAiOjE2MTQ5OTcxOTF9.gN1c055lZ8c-XzUprtUJ_YIc_9yhQcch0GbzkGemeNo
+Cookie: access_token=
