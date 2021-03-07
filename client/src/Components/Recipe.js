@@ -47,7 +47,7 @@ function Recipe(props) {
   }, []);
 
   // Search function
-  const sendSearchReq = (searchText, searchFilters) =>{
+  const sendSearchReq = (searchText, searchFilters) => {
     setLoading(true);
     RecipeService.getRecipes(searchText).then(recipes => {
       const filteredRecipes = recipes.filter((recipe) => {
@@ -58,7 +58,7 @@ function Recipe(props) {
       });
       setRecipes(filteredRecipes);
       setLoading(false);
-     });
+    });
   }
 
   return (
@@ -85,7 +85,7 @@ function Recipe(props) {
           <Button onClick={props.onOpenShoppingList}> Open cart </Button>
         </FormGroup>
         <br />
-        {isLoading ? <><CircularProgress/><br/><br/><br/><br/></>: <RecipeList recipes={recipes} />}
+        {isLoading ? <><CircularProgress /><br /><br /><br /><br /></> : <RecipeList recipes={recipes} />}
       </Container>
     </>
   );

@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   pantry: [{ type: mongoose.Schema.Types.ObjectID, ref: 'Item' }],
+  cart: [{ type: mongoose.Schema.Types.ObjectID, ref: 'Item' }],
 });
 
 UserSchema.pre('save', function (next) {

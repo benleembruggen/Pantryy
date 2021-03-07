@@ -13,7 +13,6 @@ recipeRouter.get(
   async (req, res) => {
     const { name, requireAllIngredientsAvailable } = req.query;
     const { hits } = await callFoodApi('recipeSearch', { q: name, to: 32 });
-    console.log(hits);
 
 
     if (!requireAllIngredientsAvailable) {
