@@ -17,9 +17,9 @@ function Home() {
       <ShoppingList open={cartOpen} setOpen={setCartOpen} style={{ float: 'right' }} />
       <Grid container spacing={3}>
         <Grid item xs>
-          <div style={{ height: `10vh` }}>
+          <div style={{ height: `7vh` }}>
             <div style={{ fontFamily: 'Lobster', color: '#f59b90' }}>
-              <h2>Pantryy</h2>
+              <h2 style={{paddingTop: '5px'}}>Pantryy</h2>
             </div>
           </div>
           <Pantry pantry={pantry} setPantry={setPantry} />
