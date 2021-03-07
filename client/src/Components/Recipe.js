@@ -82,10 +82,10 @@ function Recipe(props) {
             setSearchText(searchText);
             sendSearchReq(searchText, checkboxStates);
           }} placeholder='Search Recipes e.g. pasta' />
-          <Button onClick={props.onOpenShoppingList}> Open cart </Button>
+          <Button onClick={props.onOpenShoppingList}> {props.cartOpen ? 'Close cart' : 'Open cart'} </Button>
         </FormGroup>
         <br />
-        {isLoading ? <><CircularProgress /><br /><br /><br /><br /></> : <RecipeList recipes={recipes} />}
+        {isLoading ? <><CircularProgress /><br /><br /><br /><br /></> : <RecipeList refreshCart={props.refreshCart} recipes={recipes} />}
       </Container>
     </>
   );

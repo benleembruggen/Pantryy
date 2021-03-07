@@ -22,9 +22,9 @@ const styles = {
     position: 'absolute',
     left: 'calc(100% - 250px)',
     // float: 'right',
-    down: '50px',
+    top: '10vh',
     width: '250px',
-    height: '100vh',
+    height: '90vh',
     zIndex: 100,
     // background: '#042331',
     // transition: 'all 0.5s ease',
@@ -34,7 +34,7 @@ const styles = {
   },
   list: {
     overflowY: 'scroll',
-    height: `80vh`
+    height: `calc(90vh - 50px)`
   },
   headingDiv: {
     // fontFamily: 'Lobster',
@@ -42,9 +42,7 @@ const styles = {
   },
 }
 
-const ShoppingList = ({ open, setOpen }) => {
-  const [cart, setCart] = useState([]);
-
+const ShoppingList = ({ open, setCart, cart }) => {
   useEffect(() => {
     CartService.getCart().then(setCart);
   }, [])
@@ -53,14 +51,6 @@ const ShoppingList = ({ open, setOpen }) => {
 
   return (
     <Paper elevation={3} style={styles.root}>
-      <div style={{ height: `10vh` }}>
-        <div style={styles.headingDiv}>
-          <h2>Shopping List</h2>
-        </div>
-        <Button onClick={() => setOpen(false)} variant='contained' color='primary'>
-          Close
-        </Button>
-      </div>
       <List
         component='nav'
         aria-label='main mailbox folders'
@@ -69,6 +59,7 @@ const ShoppingList = ({ open, setOpen }) => {
         <Divider />
         {cart.map((item) => <PantryItem item={item} />)}
       </List>
+      <Button style={{ height: '50px' }}>Order food</Button>
     </Paper >
   );
 };

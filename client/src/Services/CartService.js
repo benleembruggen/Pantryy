@@ -22,10 +22,11 @@ export default {
       return { message: { msgBody: 'UnAuthorized' }, msgError: true };
     }
   },
-  postItem: async (item, quantity, measure) => {
+  postItem: async () => {
     const response = await fetch('/cart/item', {
       method: 'post',
-      body: JSON.stringify({ name: item.food.label, quantity, measure }),
+      // body: JSON.stringify({ name: item.food.label, quantity, measure }),
+      body: JSON.stringify({ name: 'Apple', quantity: 1500, measure: 'Gram' }),
       headers: {
         'Content-Type': 'application/json',
       },

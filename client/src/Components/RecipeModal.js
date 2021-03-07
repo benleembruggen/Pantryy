@@ -9,6 +9,7 @@ import ItemService from '../Services/ItemService';
 import Divider from '@material-ui/core/Divider';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
+import CartService from '../Services/CartService';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -40,7 +41,7 @@ const RecipeModal = ({ open, onClose, recipe, pantry }) => {
                         return <p style={{ color: '#7EF571' }}>{ingredient.text}</p>
                     }
                 }
-                return <p style={{ color: '#f55d58' }}>{ingredient.text}<IconButton size="small"><AddIcon /></IconButton></p>
+                return <p style={{ color: '#f55d58' }}>{ingredient.text}<IconButton size="small" onClick={() => CartService.postItem()}><AddIcon /></IconButton></p>
             })}
         </div>
     );
