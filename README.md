@@ -6,14 +6,3 @@ A simple app that allows users to keep an inventory of the contents of their pan
 
 Pantryy was created to reduce the amount of unused and therefor expired ingredients in a user's pantry. The meal planner component of Pantryy also allows for healthier eating by sticking to a pre-defined meal plan whilst at the same time making grocery shopping a breeze.
 
-## Running the code
-
-- Clone the reposirty
-- Run backend server
-  - `cd server`
-  - `npm i`
-  - `npm start`
-- Run frontend server
-  - `cd client`
-  - `npm i`
-  - `npm start`
